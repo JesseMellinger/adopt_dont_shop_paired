@@ -45,13 +45,13 @@ describe "as a visitor" do
 
           visit "/shelters/#{shelter_1.id}/edit"
 
-          fill_in("name", with: "Animal Control and Shelter")
-          fill_in("address", with: "0058 Nancy's Place")
-          fill_in("city", with: "Frisco")
-          fill_in("state", with: "CO")
-          fill_in("zip", with: "80443")
+          fill_in("shelter[name]", with: "Animal Control and Shelter")
+          fill_in("shelter[address]", with: "0058 Nancy's Place")
+          fill_in("shelter[city]", with: "Frisco")
+          fill_in("shelter[state]", with: "CO")
+          fill_in("shelter[zip]", with: "80443")
 
-          click_button("Submit")
+          click_button("submit")
 
           expect(current_path).to eq("/shelters/#{shelter_1.id}")
 
