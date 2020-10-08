@@ -34,7 +34,7 @@ describe "as a visitor" do
         expect(page).to have_field("shelter[zip]")
       end
     end
-    describe "when I fill out the form with update information" do
+    describe "when I fill out the form with updated information" do
       describe "and I click the button to submit the form" do
         it "a PATCH request is sent to shelters/:id, the shelters information is updated, and I am redirected to the Shelters Show page where I see the shelters updated info" do
           shelter_1 = Shelter.create(name: "Eagle County Animal Services",
