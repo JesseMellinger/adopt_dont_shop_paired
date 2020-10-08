@@ -1,15 +1,5 @@
 require 'rails_helper'
 
-As a visitor
-When I visit '/pets'
-Then I see each Pet in the system including the Pet's:
-- image
-- name
-- approximate age
-- sex
-- name of the shelter where the pet is currently located
-
-
 describe "as a visitor" do
   describe "when I visit" do
     it "I see each Pet in the system including the Pets image, name, approximate age, sex, and name of shelter where located" do
