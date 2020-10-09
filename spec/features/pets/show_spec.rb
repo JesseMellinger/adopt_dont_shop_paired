@@ -9,7 +9,7 @@ describe "as a visitor" do
                          sex: "male",
                          name_of_shelter: "Animal Control and Shelter",
                          description: "White haired German Shepherd. Sounds like John Travolta.",
-                         adoption_status: NULL)
+                         adoption_status: "NULL")
 
       visit("/pets/#{pet_1.id}")
 
