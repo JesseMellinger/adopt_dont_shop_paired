@@ -1,18 +1,4 @@
 require 'rails_helper'
-As a visitor
-When I visit a Pet Show page
-Then I see a link to update that Pet "Update Pet"
-When I click the link
-I am taken to '/pets/:id/edit' where I see a form to edit the pet's data including:
-- image
-- name
-- description
-- approximate age
-- sex
-When I click the button to submit the form "Update Pet"
-Then a `PATCH` request is sent to '/pets/:id',
-the pet's data is updated,
-and I am redirected to the Pet Show page where I see the Pet's updated information
 
 describe "as a visitor" do
   describe "when I visit a Pet Show page" do
@@ -69,16 +55,15 @@ describe "as a visitor" do
           fill_in("pet[approximate_age]", with: 102)
           fill_in("pet[sex]", with: "male")
 
-          click_button("Update Pet")
+          click_button("submit")
 
           expect(current_path).to eq("/pets/#{pet_1.id}")
 
-          expect(page).to have_content(pet_1.image)
-          expect(page).to have_content(pet_1.name)
-          expect(page).to have_content(pet_1.description)
-          expect(page).to have_content(pet_1.approximate_age)
-          expect(page).to have_content(pet_1.sex)
-        end
+          expect(page).to have_content("https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG")
+          expect(page).to have_content("Rin Tin Tin")
+          expect(page).to have_content("German Shepherd and international star.")
+          expect(page).to have_content(102)
+          expect(page).to have_content("male")
         end
       end
     end
