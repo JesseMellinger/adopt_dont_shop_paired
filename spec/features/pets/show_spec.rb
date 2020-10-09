@@ -8,7 +8,7 @@ describe "as a visitor" do
                          approximate_age: 5,
                          sex: "male",
                          name_of_shelter: "Animal Control and Shelter",
-                         descriptiion: "White haired German Shepherd. Sounds like John Travolta.",
+                         description: "White haired German Shepherd. Sounds like John Travolta.",
                          adoption_status: NULL)
 
       visit("/pets/#{pet_1.id}")
