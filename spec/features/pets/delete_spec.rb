@@ -25,6 +25,8 @@ describe "as a visitor" do
                            description: "White haired German Shepherd. Sounds like John Travolta.",
                            adoption_status: "NULL")
 
+        visit "/pets"
+
         expect(page).to have_content("Bolt")
         expect(page).to have_content("https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg")
         expect(page).to have_content(5)
