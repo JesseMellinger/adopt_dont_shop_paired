@@ -49,7 +49,7 @@ describe "as a visitor" do
 
       pet_3 = Pet.create!(image: "https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG",
                           name: "Rin Tin Tin",
-                          approximate_age: 5,
+                          approximate_age: 102,
                           sex: "male",
                           name_of_shelter: "Eagle County Animal Services",
                           description: "White haired German Shepherd. Sounds like John Travolta.",
