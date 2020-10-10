@@ -1,13 +1,5 @@
 require 'rails_helper'
 
-As a visitor
-When I visit '/shelters/:shelter_id/pets'
-Then I see each Pet that can be adopted from that Shelter with that shelter_id including the Pet's:
-- image
-- name
-- approximate age
-- sex
-
 describe "as a visitor" do
   describe "when I visit /shelters/:shelter_id/pets" do
     it "then I see each Pet that can be adopted from that Shelter with that shelter_id including the Pets image, name, approximate age, and sex" do
