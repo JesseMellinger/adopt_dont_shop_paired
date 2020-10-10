@@ -4,3 +4,4 @@
   <p><%= pet.approximate_age %></p>
   <p><%= pet.sex %></p>
 <% end %>
+<%= link_to "Create Pet", "/shelters/#{params[:id]}/pets/new", method: "get" %>
