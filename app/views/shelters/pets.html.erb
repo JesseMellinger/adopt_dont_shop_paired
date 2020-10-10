@@ -1,6 +1,6 @@
 <% @pets.each do |pet| %>
-  <p><%= pet.image %></p>
   <p><%= pet.name %></p>
+  <img src="<%= pet.image %>" alt="Image of <%= pet.name %> " id="pet_<%= pet.id %>_image" width="250" height="300">
   <p><%= pet.approximate_age %></p>
   <p><%= pet.sex %></p>
 <% end %>

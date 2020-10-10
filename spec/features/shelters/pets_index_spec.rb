@@ -76,13 +76,13 @@ describe "as a visitor" do
 
       visit("/shelters/#{shelter_1.id}/pets")
 
-      expect(page).to have_content(pet_1.image)
+      expect(page.find("#pet_#{pet_1.id}_image")['src']).to have_content('https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg')
       expect(page).to have_content(pet_1.name)
       expect(page).to have_content(pet_1.approximate_age)
       expect(page).to have_content(pet_1.sex)
 
 
-      expect(page).to have_content(pet_3.image)
+      expect(page.find("#pet_#{pet_3.id}_image")['src']).to have_content('https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG')
       expect(page).to have_content(pet_3.name)
       expect(page).to have_content(pet_3.approximate_age)
       expect(page).to have_content(pet_3.sex)

@@ -54,7 +54,9 @@ describe "as a visitor" do
 
             expect(current_path).to eq("/shelters/#{shelter_1.id}/pets")
 
-            expect(page).to have_content("https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg")
+            pet_added = Pet.find_by name: 'Bolt'
+
+            expect(page.find("#pet_#{pet_added.id}_image")['src']).to have_content('https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg')
             expect(page).to have_content("Bolt")
             expect(page).to have_content(5)
             expect(page).to have_content("male")
