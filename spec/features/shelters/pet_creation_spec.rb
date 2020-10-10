@@ -27,11 +27,11 @@ describe "as a visitor" do
 
         expect(current_path).to eq("/shelters/#{shelter_1.id}/pets/new")
 
-        expect(page).to have_field("pet[image]")
-        expect(page).to have_field("pet[name]")
-        expect(page).to have_field("pet[description]")
-        expect(page).to have_field("pet[approximate_age]")
-        expect(page).to have_field("pet[sex]")
+        expect(page).to have_field("image")
+        expect(page).to have_field("name")
+        expect(page).to have_field("description")
+        expect(page).to have_field("approximate_age")
+        expect(page).to have_field("sex")
       end
       describe "when I fill in the form with the pets image, name, description, approximate_age, and sex" do
         describe "and I click the button named Create Pet" do
@@ -56,10 +56,8 @@ describe "as a visitor" do
 
             expect(page).to have_content("https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg")
             expect(page).to have_content("Bolt")
-            expect(page).to have_content("White haired German Shepherd. Sounds like John Travolta.")
             expect(page).to have_content(5)
             expect(page).to have_content("male")
-            expect(page).to have_content("adoptable")
           end
         end
       end

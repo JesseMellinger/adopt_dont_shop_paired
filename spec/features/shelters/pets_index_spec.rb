@@ -33,45 +33,45 @@ describe "as a visitor" do
                           name: "Bolt",
                           approximate_age: 5,
                           sex: "male",
-                          name_of_shelter: "Eagle County Animal Services",
+                          name_of_shelter: shelter_1.name,
                           description: "White haired German Shepherd. Sounds like John Travolta.",
-                          adoption_status: "NULL",
+                          adoption_status: "adoptable",
                           shelter_id: shelter_1.id)
 
       pet_2 = Pet.create!(image: "https://en.wikipedia.org/wiki/Higgins_(dog)#/media/File:Higgins_the_Dog.jpg",
                           name: "Higgins",
                           approximate_age: 63,
                           sex: "male",
-                          name_of_shelter: "Animal Control and Shelter",
+                          name_of_shelter: shelter_2.name,
                           description: "Most people remember him as the original Benji.",
-                          adoption_status: "NULL",
+                          adoption_status: "adoptable",
                           shelter_id: shelter_2.id)
 
       pet_3 = Pet.create!(image: "https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG",
                           name: "Rin Tin Tin",
                           approximate_age: 102,
                           sex: "male",
-                          name_of_shelter: "Eagle County Animal Services",
-                          description: "White haired German Shepherd. Sounds like John Travolta.",
-                          adoption_status: "NULL",
+                          name_of_shelter: shelter_1.name,
+                          description: "German Shepherd and international star in motion pictures.",
+                          adoption_status: "adoptable",
                           shelter_id: shelter_1.id)
 
       pet_4 = Pet.create!(image: "https://moviepaws.files.wordpress.com/2015/10/luhad-einstein.jpg",
                           name: "Einstein",
                           approximate_age: 50,
                           sex: "male",
-                          name_of_shelter: "Eagle Valley Humane Society",
+                          name_of_shelter: shelter_3.name,
                           description: "Dr. Emmett Brown\'s pet sheepdog.",
-                          adoption_status: "NULL",
+                          adoption_status: "adoptable",
                           shelter_id: shelter_3.id)
 
-      pet_5 = Pet.create!(image: "https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG",
+      pet_5 = Pet.create!(image: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/famous-dogs-from-movies-babe-fly-1560360622.png?crop=0.625xw:1.00xh;0.178xw,0&resize=768:*",
                           name: "Fly",
                           approximate_age: 25,
                           sex: "female",
-                          name_of_shelter: "Leadville/Lake County Animal Shelter",
+                          name_of_shelter: shelter_4.name,
                           description: "Border collie from Babe.",
-                          adoption_status: "NULL",
+                          adoption_status: "adoptable",
                           shelter_id: shelter_4.id)
 
       visit("/shelters/#{shelter_1.id}/pets")

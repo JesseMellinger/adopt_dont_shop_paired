@@ -53,4 +53,25 @@ class SheltersController < ApplicationController
       @pets = Pet.find_all_pets_by_shelter_id(params[:id])
     end
 
+    def new_pet
+
+    end
+
+    def create_pet
+      pet = Pet.new({
+        image: params[:image],
+        name: params[:name],
+        approximate_age: params[:approximate_age],
+        sex: params[:sex],
+        name_of_shelter: Shelter.find(params[:id]).name,
+        description: params[:description],
+        adoption_status: "adoptable",
+        shelter_id: params[:id]
+      })
+
+      pet.save
+
+      redirect_to "/shelters/#{params[:id]}/pets"
+    end
+
 end
