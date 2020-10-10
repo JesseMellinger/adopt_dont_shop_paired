@@ -20,7 +20,7 @@ describe "as a visitor" do
 
       visit("/pets/#{pet_1.id}")
 
-      expect(page).to have_content(pet_1.image)
+      expect(page.find("#pet_#{pet_1.id}_image")['src']).to have_content('https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg')
       expect(page).to have_content(pet_1.name)
       expect(page).to have_content(pet_1.description)
       expect(page).to have_content(pet_1.approximate_age)

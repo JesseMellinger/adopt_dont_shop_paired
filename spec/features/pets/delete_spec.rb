@@ -43,7 +43,7 @@ describe "as a visitor" do
       visit "/pets"
 
       expect(page).to have_content("Bolt")
-      expect(page).to have_content("https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg")
+      expect(page.find("#pet_#{pet_1.id}_image")['src']).to have_content('https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg')
       expect(page).to have_content(5)
       expect(page).to have_content("male")
       expect(page).to have_content("Animal Control and Shelter")
@@ -55,10 +55,10 @@ describe "as a visitor" do
       expect(current_path).to eq("/pets")
 
       expect(page).to have_no_content("Bolt")
-      expect(page).to have_no_content("https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg")
       expect(page).to have_no_content(5)
       expect(page).to have_no_content("male")
       expect(page).to have_no_content("Animal Control and Shelter")
+      expect(page).not_to have_selector("#pet_#{pet_1.id}_image")
       end
     end
   end

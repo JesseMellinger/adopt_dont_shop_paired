@@ -80,7 +80,9 @@ describe "as a visitor" do
 
           expect(current_path).to eq("/pets/#{pet_1.id}")
 
-          expect(page).to have_content("https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG")
+          pet_added = Pet.find_by name: 'Rin Tin Tin'
+
+          expect(page.find("#pet_#{pet_added.id}_image")['src']).to have_content("https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG")
           expect(page).to have_content("Rin Tin Tin")
           expect(page).to have_content("German Shepherd and international star.")
           expect(page).to have_content(102)

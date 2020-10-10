@@ -58,6 +58,7 @@ class SheltersController < ApplicationController
     end
 
     def create_pet
+
       pet = Pet.new({
         image: params[:image],
         name: params[:name],
@@ -72,6 +73,16 @@ class SheltersController < ApplicationController
       pet.save
 
       redirect_to "/shelters/#{params[:id]}/pets"
+    end
+
+    private
+    def pet_params
+      params.permit(:image)
+      params.permit(:name)
+      params.permit(:approximate_age)
+      params.permit(:sex)
+      params.permit(:description)
+      params.permit(:id)
     end
 
 end
