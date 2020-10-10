@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "as a visitor" do
   describe "when I visit a shelter show page" do
     it "I see a link to update the shelter Update Shelter" do
-      shelter_1 = Shelter.create(name: "Eagle County Animal Services",
+      shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
                                  city: "Eagle",
                                  state: "CO",
@@ -15,7 +15,7 @@ describe "as a visitor" do
     end
     describe "when I click the link Update Shelter" do
       it "I am taken to /shelters/:id/edit where I can see a form to edit the shelters data" do
-        shelter_1 = Shelter.create(name: "Eagle County Animal Services",
+        shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                    address: "1400 Fairgrounds Road",
                                    city: "Eagle",
                                    state: "CO",
@@ -37,7 +37,7 @@ describe "as a visitor" do
     describe "when I fill out the form with updated information" do
       describe "and I click the button to submit the form" do
         it "a PATCH request is sent to shelters/:id, the shelters information is updated, and I am redirected to the Shelters Show page where I see the shelters updated info" do
-          shelter_1 = Shelter.create(name: "Eagle County Animal Services",
+          shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                      address: "1400 Fairgrounds Road",
                                      city: "Eagle",
                                      state: "CO",
