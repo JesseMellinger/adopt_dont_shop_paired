@@ -22,6 +22,25 @@ describe "as a visitor" do
 
       expect(page).to have_link("Eagle County Animal Services", :href=>"/shelters/#{pet_1.shelter_id}")
 
+      click_link("Eagle County Animal Services")
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}")
+
+      visit("/shelters")
+
+      expect(page).to have_link("Eagle County Animal Services", :href=>"/shelters/#{shelter_1.id}")
+
+      click_link("Eagle County Animal Services")
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}")
+
+      visit("/shelters/#{shelter_1.id}")
+
+      expect(page).to have_link("Eagle County Animal Services", :href=>"/shelters/#{shelter_1.id}")
+
+      click_link("Eagle County Animal Services")
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}")
     end
   end
 end
