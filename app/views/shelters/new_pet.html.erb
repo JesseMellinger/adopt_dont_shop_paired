@@ -1,3 +1,5 @@
+<%= link_to "Pet Index", "/pets", method: "get" %>
+
 <%= form_tag "/shelters/#{params[:id]}/pets" do %>
   <%= label_tag :image %>
   <%= text_field_tag :image %></br>

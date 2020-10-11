@@ -1,3 +1,5 @@
+<%= link_to "Pet Index", "/pets", method: "get" %>
+
 <% @pets.each do |pet| %>
   <p><%= link_to "#{pet.name}", "/pets/#{pet.id}", method: "get" %></p></br>
   <img src="<%= pet.image %>" alt="Image of <%= pet.name %> " id="pet_<%= pet.id %>_image" width="250" height="300">

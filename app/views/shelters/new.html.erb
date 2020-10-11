@@ -1,3 +1,5 @@
+<%= link_to "Pet Index", "/pets", method: "get" %>
+
 <form action="/shelters" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <p>Enter new shelter information:</p>
