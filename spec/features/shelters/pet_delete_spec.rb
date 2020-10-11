@@ -71,7 +71,7 @@ describe "as a visitor" do
         expect(page).to have_content(pet_1.sex)
         expect(page).to have_content(pet_1.name_of_shelter)
 
-        find(:xpath, "//a[@href='/pets/#{pet_1.id}']").click
+        page.find_link("delete_pet_#{pet_1.id}").click
 
         expect(current_path).to eq("/pets")
 
@@ -84,7 +84,7 @@ describe "as a visitor" do
         expect(page).to have_content(pet_2.approximate_age)
         expect(page).to have_content(pet_2.sex)
 
-        find(:xpath, "//a[@href='/pets/#{pet_2.id}']").click
+        page.find_link("delete_pet_#{pet_2.id}").click
 
         expect(current_path).to eq("/pets")
 
