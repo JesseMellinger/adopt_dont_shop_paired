@@ -1,9 +1,9 @@
 <% @pets.each do |pet| %>
-  <p><%= pet.name %></p>
+  <p><%= link_to "#{pet.name}", "/pets/#{pet.id}", method: "get" %></p></br>
   <img src="<%= pet.image %>" alt="Image of <%= pet.name %> " id="pet_<%= pet.id %>_image" width="250" height="300">
   <p><%= pet.approximate_age %></p>
   <p><%= pet.sex %></p>
   <%= link_to "Update Pet", "/pets/#{pet.id}/edit", method: "get" %>
-  <%= link_to "Delete Pet", "/pets/#{pet.id}", method: "delete" %>
+  <%= link_to "Delete Pet", "/pets/#{pet.id}", id:"delete_pet_#{pet.id}", method: "delete" %>
 <% end %></br></br></br>
 <%= link_to "Create Pet", "/shelters/#{params[:id]}/pets/new", method: "get" %>
