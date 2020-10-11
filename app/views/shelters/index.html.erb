@@ -2,6 +2,7 @@
 
 <% @shelters.each do |shelter| %>
   <h3><%= shelter.name %></h3>
-<% end %>
+  <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", method: "get" %>
+<% end %></br></br></br>
 
 <a href="/shelters/new">New Shelter</a>
