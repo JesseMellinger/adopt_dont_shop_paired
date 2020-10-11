@@ -1,3 +1,5 @@
+<%= link_to "Pet Index", "/pets", method: "get" %>
+
 <a href="/shelters">Shelter Index</a>
 <h3><%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}", method: "get" %></h3></br>
 <p><%= @shelter.address %></p>

@@ -1,4 +1,5 @@
-<a href="/pets">Pets Index</a>
+<%= link_to "Pet Index", "/pets", method: "get" %>
+
 <h2><%= link_to "#{@pet.name}", "/pets/#{@pet.id}", method: "get" %></h2></br>
 <img src="<%= @pet.image %>" alt="Image of <%= @pet.name %> " id="pet_<%= @pet.id %>_image" width="250" height="300">
 <p><%= @pet.description %></p>
