@@ -5,7 +5,7 @@
   <img src="<%= pet.image %>" alt="Image of <%= pet.name %>" id="pet_<%= pet.id %>_image" width="250" height="300">
   <h3><%= pet.approximate_age %></h3>
   <h3><%= pet.sex %></h3>
-  <h3><%= pet.name_of_shelter %></h3>
+  <h3><%= link_to "#{pet.name_of_shelter}", "/shelters/#{pet.shelter_id}", method: "get" %></h3></br>
   <%= link_to "Update Pet", "/pets/#{pet.id}/edit", method: "get" %>
   <%= link_to "Delete Pet", "/pets/#{pet.id}", method: "delete" %>
 <% end %>

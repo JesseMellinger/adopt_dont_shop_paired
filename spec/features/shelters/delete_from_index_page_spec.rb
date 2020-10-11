@@ -52,7 +52,7 @@ describe "as a visitor" do
 
         visit("/shelters")
 
-        find(:xpath, "//a[@href='/shelters/#{shelter_1.id}']").click
+        page.find_link("delete_shelter_#{shelter_1.id}").click
 
         expect(current_path).to eq("/shelters")
 
