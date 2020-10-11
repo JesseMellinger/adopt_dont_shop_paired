@@ -76,9 +76,6 @@ describe "as a visitor" do
         expect(current_path).to eq("/pets")
 
         expect(page).to have_no_content(pet_1.name)
-        expect(page).to have_no_content(pet_1.approximate_age)
-        expect(page).to have_no_content(pet_1.sex)
-        expect(page).to have_no_content(pet_1.name_of_shelter)
 
         visit("/shelters/#{shelter_1.id}/pets")
 
@@ -86,16 +83,12 @@ describe "as a visitor" do
         expect(page.find("#pet_#{pet_2.id}_image")['src']).to have_content('https://en.wikipedia.org/wiki/Rin_Tin_Tin#/media/File:Rin_Tin_Tin_1929.JPG')
         expect(page).to have_content(pet_2.approximate_age)
         expect(page).to have_content(pet_2.sex)
-        expect(page).to have_content(pet_2.name_of_shelter)
 
         find(:xpath, "//a[@href='/pets/#{pet_2.id}']").click
 
         expect(current_path).to eq("/pets")
 
         expect(page).to have_no_content(pet_2.name)
-        expect(page).to have_no_content(pet_2.approximate_age)
-        expect(page).to have_no_content(pet_2.sex)
-        expect(page).to have_no_content(pet_2.name_of_shelter)
       end
     end
   end
