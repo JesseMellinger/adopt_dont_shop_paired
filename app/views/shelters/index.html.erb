@@ -1,6 +1,6 @@
 <%= link_to "Pet Index", "/pets", method: "get" %>
 
-<h1>Shelters Index</h1>
+<h1>Shelter Index</h1>
 
 <% @shelters.each do |shelter| %>
   <h3><%= link_to "#{shelter.name}", "/shelters/#{shelter.id}", method: "get" %></h3></br>
