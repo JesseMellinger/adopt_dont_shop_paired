@@ -31,11 +31,11 @@ describe "as a visitor" do
 
       visit("/shelters")
 
-      expect(page).to have_link("Update Shelter", :href="/shelters/#{shelter_1.id}/edit")
-      expect(page).to have_link("Update Shelter", :href="/shelters/#{shelter_2.id}/edit")
-      expect(page).to have_link("Update Shelter", :href="/shelters/#{shelter_3.id}/edit")
-      expect(page).to have_link("Update Shelter", :href="/shelters/#{shelter_4.id}/edit")
-      expect(page).to have_link("Update Shelter", :href="/shelters/#{shelter_5.id}/edit")
+      expect(page).to have_link("Update Shelter", :href=>"/shelters/#{shelter_1.id}/edit")
+      expect(page).to have_link("Update Shelter", :href=>"/shelters/#{shelter_2.id}/edit")
+      expect(page).to have_link("Update Shelter", :href=>"/shelters/#{shelter_3.id}/edit")
+      expect(page).to have_link("Update Shelter", :href=>"/shelters/#{shelter_4.id}/edit")
+      expect(page).to have_link("Update Shelter", :href=>"/shelters/#{shelter_5.id}/edit")
     end
     describe "when I click the link" do
       it "then I should be taken to that shelters edit page where I can update its information" do
@@ -49,21 +49,7 @@ describe "as a visitor" do
                                     city: "Frisco",
                                     state: "CO",
                                     zip: "80443")
-        shelter_3 = Shelter.create!(name: "Eagle Valley Humane Society",
-                                    address: "50 Chambers Ave",
-                                    city: "Eagle",
-                                    state: "CO",
-                                    zip: "81631")
-        shelter_4 = Shelter.create!(name: "Leadville/Lake County Animal Shelter",
-                                    address: "428 E 12th St.",
-                                    city: "Leadville",
-                                    state: "CO",
-                                    zip: "80461")
-        shelter_5 = Shelter.create!(name: "Aspen Animal Shelter",
-                                    address: "101 Animal Shelter Road",
-                                    city: "Aspen",
-                                    state: "CO",
-                                    zip: "81611")
+
 
         visit("/shelters")
 
@@ -76,7 +62,20 @@ describe "as a visitor" do
         expect(page).to have_field("shelter[city]")
         expect(page).to have_field("shelter[state]")
         expect(page).to have_field("shelter[zip]")
-        expect(page).to have_button("#submit")
+        expect(page).to have_button("submit")
+
+        visit("/shelters")
+
+        find(:xpath, "//a[@href='/shelters/#{shelter_2.id}/edit']").click
+
+        expect(current_path).to eq("/shelters/#{shelter_2.id}/edit")
+
+        expect(page).to have_field("shelter[name]")
+        expect(page).to have_field("shelter[address]")
+        expect(page).to have_field("shelter[city]")
+        expect(page).to have_field("shelter[state]")
+        expect(page).to have_field("shelter[zip]")
+        expect(page).to have_button("submit")
       end
     end
   end
