@@ -13,13 +13,13 @@ require 'rails_helper'
 describe "as a visitor" do
   describe "when I visit a Users show page" do
     it "then I see all that Users information" do
-      user_1 = User.create!{
+      user_1 = User.create!(
         name: "Testy",
         street_address: "221B Baker St.",
         city: "London",
         state: "CO",
         zip: "81650"
-      }
+      )
 
       visit("/users/#{user_1.id}")
 
