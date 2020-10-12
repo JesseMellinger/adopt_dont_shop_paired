@@ -74,15 +74,5 @@ class SheltersController < ApplicationController
 
       redirect_to "/shelters/#{params[:id]}/pets"
     end
-
-    private
-    def pet_params
-      params.permit(:image)
-      params.permit(:name)
-      params.permit(:approximate_age)
-      params.permit(:sex)
-      params.permit(:description)
-      params.permit(:id)
-    end
-
+    
 end
