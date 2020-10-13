@@ -8,3 +8,11 @@
 <p><%= @shelter.zip %></p>
 <a href="/shelters/<%= @shelter.id %>/edit">Update Shelter</a>
 <%= link_to "Delete Shelter", "/shelters/#{@shelter.id}", method: "delete" %>
+
+<% @reviews.each do |review| %>
+  <h3><%= review.title %></h3>
+  <p><%= review.rating %></p>
+  <p><%= review.content %></p>
+  <p><%= review.picture %></p>
+  <p><%= review.user.name %></p>
+<% end %>
