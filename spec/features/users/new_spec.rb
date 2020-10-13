@@ -18,7 +18,7 @@ describe "as a visitor" do
       visit("/users/new")
 
       fill_in("Name", with: "Testy")
-      fill_in("Street Address", with: "221B Baker Street")
+      fill_in(:street_address, with: "221B Baker Street")
       fill_in("City", with: "London")
       fill_in("State", with: "CO")
       fill_in("Zip", with: "81650")
