@@ -1,5 +1,5 @@
 class ShelterReviewsController < ApplicationController
   def new
-    @shelter = Shelter.find(params[:id])
+    @shelter_id = params[:id]
   end
 end
