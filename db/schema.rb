@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_021209) do
+ActiveRecord::Schema.define(version: 2020_10_13_030902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,10 @@ ActiveRecord::Schema.define(version: 2020_10_13_021209) do
     t.string "rating"
     t.string "content"
     t.string "picture"
+    t.bigint "shelter_id"
+    t.bigint "user_id"
+    t.index ["shelter_id"], name: "index_reviews_on_shelter_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "shelters", force: :cascade do |t|
@@ -51,4 +55,6 @@ ActiveRecord::Schema.define(version: 2020_10_13_021209) do
   end
 
   add_foreign_key "pets", "shelters"
+  add_foreign_key "reviews", "shelters"
+  add_foreign_key "reviews", "users"
 end
