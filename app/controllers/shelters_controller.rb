@@ -6,6 +6,7 @@ class SheltersController < ApplicationController
 
   def show
     @shelter = Shelter.find(params[:id])
+    @reviews = @shelter.reviews
   end
 
   def new
@@ -74,5 +75,5 @@ class SheltersController < ApplicationController
 
       redirect_to "/shelters/#{params[:id]}/pets"
     end
-    
+
 end
