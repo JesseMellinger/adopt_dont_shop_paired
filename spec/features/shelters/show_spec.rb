@@ -92,6 +92,12 @@ describe "as a visitor" do
                             state: "CO",
                             zip: "81650")
 
+      user_2 = User.create!(name: "Tyrion Lannister",
+                            street_address: "282 Kevin Brook",
+                            city: "Lannisport",
+                            state: "CA",
+                            zip: "58517")
+
       review_1 = Review.create!(title: "Friends don\'t lie",
                                 rating: "5",
                                 content: "Only the educated are free.",
@@ -99,9 +105,16 @@ describe "as a visitor" do
                                 shelter_id: shelter_1.id,
                                 user_id: user_1.id)
 
+      review_2 = Review.create!(title: "Ohh yea, you gotta get schwifty.",
+                                rating: "4",
+                                content: "Hello, IT. Have you tried turning it off and on again?",
+                                picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
+                                shelter_id: shelter_1.id,
+                                user_id: user_2.id)
+
       visit("/shelters/#{shelter_1.id}")
 
-      click_link("#edit-#{review_1.id}-link")
+      page.find("#edit-#{review_1.id}-link").click
 
       expect(current_path).to eq("/shelters/#{shelter_1.id}/#{review_1.id}/edit")
     end
