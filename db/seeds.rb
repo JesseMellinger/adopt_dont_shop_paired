@@ -23,16 +23,19 @@ shelter_2 = Shelter.create!(name: "Animal Control and Shelter",
                             city: "Frisco",
                             state: "CO",
                             zip: "80443")
+
 shelter_3 = Shelter.create!(name: "Eagle Valley Humane Society",
                             address: "50 Chambers Ave",
                             city: "Eagle",
                             state: "CO",
                             zip: "81631")
+
 shelter_4 = Shelter.create!(name: "Leadville/Lake County Animal Shelter",
                             address: "428 E 12th St.",
                             city: "Leadville",
                             state: "CO",
                             zip: "80461")
+
 shelter_5 = Shelter.create!(name: "Aspen Animal Shelter",
                             address: "101 Animal Shelter Road",
                             city: "Aspen",

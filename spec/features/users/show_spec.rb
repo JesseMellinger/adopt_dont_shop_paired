@@ -50,6 +50,12 @@ describe "as a visitor" do
                                  state: "CO",
                                  zip: "81631")
 
+      shelter_2 = Shelter.create!(name: "Animal Control and Shelter",
+                                  address: "0058 Nancy's Place",
+                                  city: "Frisco",
+                                  state: "CO",
+                                  zip: "80443")
+
       review_1 = Review.create!(title: "Friends don\'t lie",
                                 rating: "5",
                                 content: "Only the educated are free.",
@@ -66,13 +72,13 @@ describe "as a visitor" do
 
       visit("/users/#{user_1.id}")
 
-        within "##{user_1.id}-#{review_1.id}" do
+        within "#review-#{review_1.id}" do
           expect(page).to have_content(review_1.title)
           expect(page).to have_content(review_1.rating)
           expect(page).to have_content(review_1.content)
         end
 
-        within "##{user_1.id}-#{review_3.id}" do
+        within "#review-#{review_3.id}" do
           expect(page).to have_content(review_3.title)
           expect(page).to have_content(review_3.rating)
           expect(page).to have_content(review_3.content)
