@@ -10,6 +10,11 @@ require 'rails_helper'
 #   - State
 #   - Zip
 
+# As a visitor
+# When I visit a User's show page
+# Then I see every review this User has written
+# Including the review's title, rating, and content
+
 describe "as a visitor" do
   describe "when I visit a Users show page" do
     it "then I see all that Users information" do
@@ -28,6 +33,20 @@ describe "as a visitor" do
       expect(page).to have_content(user_1.city)
       expect(page).to have_content(user_1.state)
       expect(page).to have_content(user_1.zip)
+    end
+
+    it "then I see every review this user has written" do
+      user_1 = User.create!(
+        name: "Testy",
+        street_address: "221B Baker St.",
+        city: "London",
+        state: "CO",
+        zip: "81650"
+      )
+
+      visit("/users/#{user_1.id}")
+
+      
     end
   end
 end
