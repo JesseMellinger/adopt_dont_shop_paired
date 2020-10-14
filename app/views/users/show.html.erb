@@ -3,3 +3,11 @@
 <p><%= @user.city %></p>
 <p><%= @user.state %></p>
 <p><%= @user.zip %></p>
+
+<% @reviews.each do |review| %>
+  <section id="review-<%= review.id %>">
+    <h3><%= review.title %></h3>
+    <p><%= review.rating %></p>
+    <p><%= review.content %></p>
+  </section>
+<% end %>
