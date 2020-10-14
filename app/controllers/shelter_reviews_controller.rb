@@ -4,12 +4,12 @@ class ShelterReviewsController < ApplicationController
   end
 
   def create
-    user = User.where(name: params[:name])
-
+    user = User.find_by(name: params[:name])
+    
     shelter = Shelter.find(params[:id])
 
     review = Review.new(shelter_review_params)
-    review.user_id = user.first.id
+    review.user_id = user.id
     review.shelter_id = shelter.id
     review.save!
 
