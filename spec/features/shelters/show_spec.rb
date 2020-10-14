@@ -66,5 +66,18 @@ describe "as a visitor" do
       expect(page).to have_content(review_2.picture)
       expect(page).to have_content(user_2.name)
     end
+    it "then I see a link to add a new review for this shelter" do
+      shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                 address: "1400 Fairgrounds Road",
+                                 city: "Eagle",
+                                 state: "CO",
+                                 zip: "81631")
+
+      visit("/shelters/#{shelter_1.id}")
+
+      click_on("New Review")
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+    end
   end
 end
