@@ -20,6 +20,12 @@ require 'rails_helper'
 # I see a flash message indicating that I need to fill in a title, rating, and content in order to edit a shelter review
 # And I'm returned to the edit form to edit that review
 
+# As a visitor,
+# When I visit the page to edit a review
+# And I enter the name of a User that doesn't exist in the database, but still try to submit the form
+# I see a flash message indicating that the User couldn't be found
+# And I'm returned to the edit form to edit the review
+
 describe "when I click on the Edit Review link" do
   before :each do
     @shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
@@ -108,6 +114,24 @@ describe "when I click on the Edit Review link" do
         fill_in 'Name', with: "Legolas"
 
         expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
+      end
+    end
+
+    describe "and the user doesn't exist in the database but I still try to submit" do
+      it "I see a flash message indicating that the User couldn't be found" do
+
+        visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
+
+        fill_in 'Title', with: "Ohh yea, you gotta get schwifty."
+        fill_in 'Rating', with: "4"
+        fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
+        fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
+        fill_in 'Name', with: "Legolas"
+
+        click_button("Update Review")
+
+        expect(page).to have_content("User could not be found")
         expect(current_path).to eq("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
       end
     end
