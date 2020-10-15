@@ -14,6 +14,12 @@ require 'rails_helper'
 # When the form is submitted, I should return to that shelter's show page
 # And I can see my updated review
 
+# As a visitor,
+# When I visit the page to edit a review
+# And I fail to enter a title, a rating, and/or content in the edit shelter review form, but still try to submit the form
+# I see a flash message indicating that I need to fill in a title, rating, and content in order to edit a shelter review
+# And I'm returned to the edit form to edit that review
+
 describe "when I click on the Edit Review link" do
   before :each do
     @shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
@@ -74,6 +80,35 @@ describe "when I click on the Edit Review link" do
         expect(page).to have_content("Hello, IT. Have you tried turning it off and on again?")
         expect(page).to have_content("https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
         expect(page).to have_content("Legolas")
+      end
+    end
+  end
+
+  describe "when I visit the page to edit a review" do
+    describe "and I fail to enter a title, a rating, and/or content but still try to submit" do
+      it "I see a flash message indicating that I need to fill in a title, rating, and content in order to edit a shelter review" do
+
+        visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
+
+        fill_in 'Title', with: "Ohh yea, you gotta get schwifty."
+        fill_in 'Rating', with: "4"
+        fill_in 'Content', with: ""
+        fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
+        fill_in 'Name', with: "Legolas"
+
+        click_button("Update Review")
+
+        expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
+
+        fill_in 'Title', with: ""
+        fill_in 'Rating', with: ""
+        fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
+        fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
+        fill_in 'Name', with: "Legolas"
+
+        expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
       end
     end
   end
