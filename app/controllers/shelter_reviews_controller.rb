@@ -24,13 +24,13 @@ class ShelterReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:review_id])
-    user = User.find(review.user_id)
+    user = User.find(review.user_id).update(name: params[:name])
+    
     review.update({
       title: params[:title],
       rating: params[:rating],
       content: params[:content],
-      picture: params[:picture],
-      name: user.name
+      picture: params[:picture]
       })
     review.save
     redirect_to "/shelters/#{params[:id]}"
