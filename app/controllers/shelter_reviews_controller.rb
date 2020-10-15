@@ -34,15 +34,14 @@ class ShelterReviewsController < ApplicationController
     review = Review.find(params[:review_id])
     User.find(review.user_id).update(name: params[:name])
 
-    review.update(
-      {
-      title: params[:title],
-      rating: params[:rating],
-      content: params[:content],
-      picture: params[:picture]
-      })
-    review.save
-    redirect_to "/shelters/#{params[:shelter_id]}"
+    review.update(shelter_review_params)
+
+    if review.save
+      redirect_to "/shelters/#{params[:shelter_id]}"
+    else
+      flash[:notice] = "Please fill in the 'Title', 'Rating', and 'Content' fields"
+      redirect_to "/shelters/#{params[:shelter_id]}/#{review.id}/edit"
+    end
   end
 
   def destroy
