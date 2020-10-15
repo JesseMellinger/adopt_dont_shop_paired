@@ -17,6 +17,6 @@
     <p><%= review.content %></p>
     <p><%= review.picture %></p>
     <p><%= review.user.name %></p>
-    <%= link_to "Edit Review", "/shelters/#{@shelter.id}/#{review.id}/edit", method: "get", id: "edit-#{review.id}-link"%>
+    <%= link_to "Edit Review", "/shelters/#{@shelter.id}/#{review.id}/edit", method: "get" %>
   </section>
 <% end %>

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "as a visitor" do
-  describe "when I visit /shelters/:id" do
+  describe "when I visit a shelters show page" do
     it "I see the shelter with that id including the shelters name, address, city, state, and zip" do
       shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
@@ -17,8 +17,6 @@ describe "as a visitor" do
       expect(page).to have_content(shelter_1.state)
       expect(page).to have_content(shelter_1.zip)
     end
-  end
-  describe "when I visit a shelters show page" do
     it "then I see a list of reviews for that shelter" do
       shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
@@ -92,12 +90,6 @@ describe "as a visitor" do
                             state: "CO",
                             zip: "81650")
 
-      user_2 = User.create!(name: "Tyrion Lannister",
-                            street_address: "282 Kevin Brook",
-                            city: "Lannisport",
-                            state: "CA",
-                            zip: "58517")
-
       review_1 = Review.create!(title: "Friends don\'t lie",
                                 rating: "5",
                                 content: "Only the educated are free.",
@@ -110,13 +102,19 @@ describe "as a visitor" do
                                 content: "Hello, IT. Have you tried turning it off and on again?",
                                 picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
                                 shelter_id: shelter_1.id,
-                                user_id: user_2.id)
+                                user_id: user_1.id)
 
       visit("/shelters/#{shelter_1.id}")
 
-      page.find("#edit-#{review_1.id}-link").click
+      within "#review-#{review_1.id}" do
+        page.find_link("Edit Review")
+      end
 
-      expect(current_path).to eq("/shelters/#{shelter_1.id}/#{review_1.id}/edit")
+      within "#review-#{review_2.id}" do
+        click_link "Edit Review"
+      end
+
+      expect(current_path).to eq("/shelters/#{shelter_1.id}/#{review_2.id}/edit")
     end
   end
 end
