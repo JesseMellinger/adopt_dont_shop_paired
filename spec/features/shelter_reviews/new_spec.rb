@@ -67,6 +67,7 @@ describe "as a visitor" do
                              state: "CO",
                              zip: "81650")
 
+
         visit("/shelters/#{shelter_1.id}/reviews/new")
 
         fill_in("title", with: "Friends don\'t lie")
@@ -77,7 +78,7 @@ describe "as a visitor" do
 
         click_on("Create Review")
 
-        expect(flash[:notice]).to eq("Please fill in the 'Title', 'Rating', and 'Content' fields")
+        expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
 
         expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
 

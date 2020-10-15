@@ -12,9 +12,14 @@ class ShelterReviewsController < ApplicationController
     review = Review.new(shelter_review_params)
     review.user_id = user.id
     review.shelter_id = shelter.id
-    review.save!
+    
+    if review.save
+      redirect_to "/shelters/#{params[:id]}"
+    else
+      flash[:notice] = "Please fill in the 'Title', 'Rating', and 'Content' fields"
 
-    redirect_to "/shelters/#{params[:id]}"
+      redirect_to "/shelters/#{shelter.id}/reviews/new"
+    end
   end
 
   def edit
