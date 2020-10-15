@@ -88,6 +88,18 @@ describe "as a visitor" do
 
         expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
 
+        fill_in("title", with: "")
+        fill_in("rating", with: "")
+        fill_in("picture", with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
+        fill_in("content", with: "Only the educated are free.")
+        fill_in("name", with: "Testy")
+
+        click_on("Create Review")
+
+        expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
+
+        expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+
       end
       describe "when I enter the name of a user that doesn't exist in the database, but still try to submit the form" do
         it "then I see a flash message indicating that the User couldn't be found" do
