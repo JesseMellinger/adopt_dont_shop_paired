@@ -18,5 +18,6 @@
     <p><%= review.picture %></p>
     <p><%= review.user.name %></p>
     <%= link_to "Edit Review", "/shelters/#{@shelter.id}/#{review.id}/edit", method: "get" %>
+    <%= link_to "Delete Review", "/shelters/#{@shelter.id}/#{review.id}", method: "delete" %>
   </section>
 <% end %>
