@@ -1,3 +1,4 @@
+
 class ShelterReviewsController < ApplicationController
   def new
     @shelter_id = params[:id]
@@ -24,8 +25,8 @@ class ShelterReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:review_id])
-    user = User.find(review.user_id).update(name: params[:name])
-    
+    User.find(review.user_id).update(name: params[:name])
+
     review.update({
       title: params[:title],
       rating: params[:rating],
@@ -33,6 +34,11 @@ class ShelterReviewsController < ApplicationController
       picture: params[:picture]
       })
     review.save
+    redirect_to "/shelters/#{params[:id]}"
+  end
+
+  def destroy
+    Review.destroy(params[:review_id])
     redirect_to "/shelters/#{params[:id]}"
   end
 
