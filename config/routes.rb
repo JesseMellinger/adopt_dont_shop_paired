@@ -24,10 +24,10 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show'
   post '/users', to: 'users#create'
 
-  get '/shelters/:id/reviews/new', to: 'shelter_reviews#new'
-  post '/shelters/:id', to: 'shelter_reviews#create'
-  get '/shelters/:id/:review_id/edit', to: 'shelter_reviews#edit'
-  patch '/shelters/:id/:review_id', to: 'shelter_reviews#update'
-  delete '/shelters/:id/:review_id', to: 'shelter_reviews#destroy'
+  get '/shelters/:shelter_id/reviews/new', to: 'shelter_reviews#new'
+  post '/shelters/:shelter_id', to: 'shelter_reviews#create'
+  get '/shelters/:shelter_id/:review_id/edit', to: 'shelter_reviews#edit'
+  patch '/shelters/:shelter_id/:review_id', to: 'shelter_reviews#update'
+  delete '/shelters/:shelter_id/:review_id', to: 'shelter_reviews#destroy'
 
 end
