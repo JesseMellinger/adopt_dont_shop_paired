@@ -77,7 +77,7 @@ describe "as a visitor" do
         visit("/shelters/#{shelter_1.id}/reviews/new")
 
         fill_in("title", with: "Friends don\'t lie")
-        fill_in("rating", with: "5")
+        fill_in("rating", with: 5)
         fill_in("picture", with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
         fill_in("content", with: "")
         fill_in("name", with: "Testy")
@@ -119,7 +119,7 @@ describe "as a visitor" do
           visit("/shelters/#{shelter_1.id}/reviews/new")
 
           fill_in("title", with: "Friends don\'t lie")
-          fill_in("rating", with: "5")
+          fill_in("rating", with: 5)
           fill_in("picture", with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
           fill_in("content", with: "Only the educated are free.")
           fill_in("name", with: "Legolas")

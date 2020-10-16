@@ -41,7 +41,7 @@ describe "when I click on the Edit Review link" do
                           zip: "81650")
 
     @review_1 = Review.create!(title: "Friends don\'t lie",
-                              rating: "5",
+                              rating: 5,
                               content: "Only the educated are free.",
                               picture: "https://upload.wikimedia.org/wikipedia/commons/0/00/Epicteti_Enchiridion_Latinis_versibus_adumbratum_%28Oxford_1715%29_frontispiece.jpg",
                               shelter_id: @shelter_1.id,
@@ -51,7 +51,7 @@ describe "when I click on the Edit Review link" do
     visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
 
     expect(find_field(:title).value).to eq(@review_1.title)
-    expect(find_field(:rating).value).to eq(@review_1.rating)
+    expect(find_field(:rating).value.to_i).to eq(@review_1.rating)
     expect(find_field(:content).value).to eq(@review_1.content)
     expect(find_field(:picture).value).to eq(@review_1.picture)
     expect(find_field(:name).value).to eq(@user_1.name)
@@ -61,7 +61,7 @@ describe "when I click on the Edit Review link" do
     visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
 
     fill_in 'Title', with: "Ohh yea, you gotta get schwifty."
-    fill_in 'Rating', with: "4"
+    fill_in 'Rating', with: 4
     fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
     fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
     fill_in 'Name', with: "Legolas"
@@ -72,7 +72,7 @@ describe "when I click on the Edit Review link" do
       visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
 
       fill_in 'Title', with: "Ohh yea, you gotta get schwifty."
-      fill_in 'Rating', with: "4"
+      fill_in 'Rating', with: 4
       fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
       fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
       fill_in 'Name', with: "Testy"
@@ -82,7 +82,7 @@ describe "when I click on the Edit Review link" do
 
       within("#review-#{@review_1.id}") do
         expect(page).to have_content("Ohh yea, you gotta get schwifty.")
-        expect(page).to have_content("4")
+        expect(page).to have_content(4)
         expect(page).to have_content("Hello, IT. Have you tried turning it off and on again?")
         expect(page).to have_content("https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
         expect(page).to have_content("Testy")
@@ -97,7 +97,7 @@ describe "when I click on the Edit Review link" do
         visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
 
         fill_in 'Title', with: "Ohh yea, you gotta get schwifty."
-        fill_in 'Rating', with: "4"
+        fill_in 'Rating', with: 4
         fill_in 'Content', with: ""
         fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
         fill_in 'Name', with: "Testy"
@@ -124,7 +124,7 @@ describe "when I click on the Edit Review link" do
         visit("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
 
         fill_in 'Title', with: "Ohh yea, you gotta get schwifty."
-        fill_in 'Rating', with: "4"
+        fill_in 'Rating', with: 4
         fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
         fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
         fill_in 'Name', with: "Legolas"
