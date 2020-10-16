@@ -36,8 +36,8 @@ describe User, type: :model do
                                 rating: 4,
                                 content: "Hello, IT. Have you tried turning it off and on again?",
                                 picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
-                                shelter_id: shelter_1.id,
-                                user_id: user_1.id)
+                                shelter_id: @shelter_1.id,
+                                user_id: @user_1.id)
 
       @review_3 = Review.create!(title: "Great food",
                                 rating: 2,
@@ -47,13 +47,13 @@ describe User, type: :model do
                                 user_id: @user_1.id)
     end
     it '#average_review_rating' do
-      expect(@user_1.average_review_rating).to eq(4.0)
+      expect(@user_1.average_review_rating.to_f.round(1)).to eq(3.7)
     end
     it "#best_review" do
       expect(@user_1.best_review).to eq(@review_1)
     end
     it "#worst_review" do
-      expect(@user_1.best_review).to eq(@review_3)
+      expect(@user_1.worst_review).to eq(@review_3)
     end
   end
 end
