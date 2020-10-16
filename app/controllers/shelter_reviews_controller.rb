@@ -31,15 +31,21 @@ class ShelterReviewsController < ApplicationController
   end
 
   def update
+    user = User.find_by(name: params[:name])
     review = Review.find(params[:review_id])
-    User.find(review.user_id).update(name: params[:name])
 
-    review.update(shelter_review_params)
+    if user
+      user.update(name: params[:name])
+      review.update(shelter_review_params)
+        if review.save
 
-    if review.save
-      redirect_to "/shelters/#{params[:shelter_id]}"
+          redirect_to "/shelters/#{params[:shelter_id]}"
+        else
+          flash[:notice] = "Please fill in the 'Title', 'Rating', and 'Content' fields"
+          redirect_to "/shelters/#{params[:shelter_id]}/#{review.id}/edit"
+        end
     else
-      flash[:notice] = "Please fill in the 'Title', 'Rating', and 'Content' fields"
+      flash[:notice] = "User could not be found"
       redirect_to "/shelters/#{params[:shelter_id]}/#{review.id}/edit"
     end
   end
