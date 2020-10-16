@@ -75,7 +75,7 @@ describe "when I click on the Edit Review link" do
       fill_in 'Rating', with: "4"
       fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
       fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
-      fill_in 'Name', with: "Legolas"
+      fill_in 'Name', with: "Testy"
       click_button("Update Review")
 
       expect(current_path).to eq("/shelters/#{@shelter_1.id}")
@@ -85,7 +85,7 @@ describe "when I click on the Edit Review link" do
         expect(page).to have_content("4")
         expect(page).to have_content("Hello, IT. Have you tried turning it off and on again?")
         expect(page).to have_content("https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
-        expect(page).to have_content("Legolas")
+        expect(page).to have_content("Testy")
       end
     end
   end
@@ -100,7 +100,7 @@ describe "when I click on the Edit Review link" do
         fill_in 'Rating', with: "4"
         fill_in 'Content', with: ""
         fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
-        fill_in 'Name', with: "Legolas"
+        fill_in 'Name', with: "Testy"
 
         click_button("Update Review")
 
@@ -111,7 +111,7 @@ describe "when I click on the Edit Review link" do
         fill_in 'Rating', with: ""
         fill_in 'Content', with: "Hello, IT. Have you tried turning it off and on again?"
         fill_in 'Picture', with: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png"
-        fill_in 'Name', with: "Legolas"
+        fill_in 'Name', with: "Testy"
 
         expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
         expect(current_path).to eq("/shelters/#{@shelter_1.id}/#{@review_1.id}/edit")
