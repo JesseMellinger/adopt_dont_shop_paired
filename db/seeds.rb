@@ -80,3 +80,10 @@ review_3 = Review.create!(title: "Great food",
                           picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg/594px-Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg",
                           shelter_id: shelter_2.id,
                           user_id: user_1.id)
+
+review_4 = Review.create!(title: "Good atmosphere",
+                          rating: 2,
+                          content: "Give me liberty or give me death.",
+                          picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg/594px-Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg",
+                          shelter_id: shelter_3.id,
+                          user_id: user_1.id)
