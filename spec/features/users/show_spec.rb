@@ -89,14 +89,12 @@ describe "as a visitor" do
         end
 
     end
-    xit "then I see the average rating of all of their reviews" do
-      user_1 = User.create!(
-        name: "Testy",
-        street_address: "221B Baker St.",
-        city: "London",
-        state: "CO",
-        zip: "81650"
-      )
+    it "then I see the average rating of all of their reviews" do
+      user_1 = User.create!(name: "Testy",
+                            street_address: "221B Baker St.",
+                            city: "London",
+                            state: "CO",
+                            zip: "81650")
 
       shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
