@@ -1,8 +1,24 @@
-<h3><%= @user.name %></h3></br>
+<h1><%= @user.name %></h1></br>
 <p><%= @user.street_address %></p>
 <p><%= @user.city %></p>
 <p><%= @user.state %></p>
 <p><%= @user.zip %></p>
+
+<h2>Average Rating of Reviews: <%= @average_review_rating %></h2>
+
+<section id="best-review">
+  <h2>Best Review:</h2>
+  <h3><%= @best_review.title %></h3>
+  <p><%= @best_review.rating %></p>
+  <p><%= @best_review.content %></p>
+</section>
+
+<section id="worst-review">
+  <h2>Worst Review:</h2>
+  <h3><%= @worst_review.title %></h3>
+  <p><%= @worst_review.rating %></p>
+  <p><%= @worst_review.content %></p>
+</section>
 
 <% @reviews.each do |review| %>
   <section id="review-<%= review.id %>">
@@ -11,5 +27,3 @@
     <p><%= review.content %></p>
   </section>
 <% end %>
-
-<h2>Average Rating of Reviews: <%= @average_review_rating %></h2>
