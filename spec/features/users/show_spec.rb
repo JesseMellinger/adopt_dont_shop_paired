@@ -89,7 +89,7 @@ describe "as a visitor" do
         end
 
     end
-    it "then I see the average rating of all of their reviews" do
+    xit "then I see the average rating of all of their reviews" do
       user_1 = User.create!(
         name: "Testy",
         street_address: "221B Baker St.",

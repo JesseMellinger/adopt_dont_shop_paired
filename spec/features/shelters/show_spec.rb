@@ -37,14 +37,14 @@ describe "as a visitor" do
                             zip: "58517")
 
       review_1 = Review.create!(title: "Friends don\'t lie",
-                                rating: "5",
+                                rating: 5,
                                 content: "Only the educated are free.",
                                 picture: "https://upload.wikimedia.org/wikipedia/commons/0/00/Epicteti_Enchiridion_Latinis_versibus_adumbratum_%28Oxford_1715%29_frontispiece.jpg",
                                 shelter_id: shelter_1.id,
                                 user_id: user_1.id)
 
       review_2 = Review.create!(title: "Ohh yea, you gotta get schwifty.",
-                                rating: "4",
+                                rating: 4,
                                 content: "Hello, IT. Have you tried turning it off and on again?",
                                 picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
                                 shelter_id: shelter_1.id,
@@ -91,14 +91,14 @@ describe "as a visitor" do
                             zip: "81650")
 
       review_1 = Review.create!(title: "Friends don\'t lie",
-                                rating: "5",
+                                rating: 5,
                                 content: "Only the educated are free.",
                                 picture: "https://upload.wikimedia.org/wikipedia/commons/0/00/Epicteti_Enchiridion_Latinis_versibus_adumbratum_%28Oxford_1715%29_frontispiece.jpg",
                                 shelter_id: shelter_1.id,
                                 user_id: user_1.id)
 
       review_2 = Review.create!(title: "Ohh yea, you gotta get schwifty.",
-                                rating: "4",
+                                rating: 4,
                                 content: "Hello, IT. Have you tried turning it off and on again?",
                                 picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
                                 shelter_id: shelter_1.id,
@@ -130,14 +130,14 @@ describe "as a visitor" do
                             zip: "81650")
 
       review_1 = Review.create!(title: "Friends don\'t lie",
-                                rating: "5",
+                                rating: 5,
                                 content: "Only the educated are free.",
                                 picture: "https://upload.wikimedia.org/wikipedia/commons/0/00/Epicteti_Enchiridion_Latinis_versibus_adumbratum_%28Oxford_1715%29_frontispiece.jpg",
                                 shelter_id: shelter_1.id,
                                 user_id: user_1.id)
 
       review_2 = Review.create!(title: "Ohh yea, you gotta get schwifty.",
-                                rating: "4",
+                                rating: 4,
                                 content: "Hello, IT. Have you tried turning it off and on again?",
                                 picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
                                 shelter_id: shelter_1.id,
