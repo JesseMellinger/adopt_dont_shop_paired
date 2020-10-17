@@ -13,6 +13,12 @@ describe User, type: :model do
                             state: "CO",
                             zip: "81650")
 
+      @user_2 = User.create!(name: "Tyrion Lannister",
+                             street_address: "282 Kevin Brook",
+                             city: "Lannisport",
+                             state: "CA",
+                             zip: "58517")
+
       @shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
                                  city: "Eagle",
@@ -49,11 +55,15 @@ describe User, type: :model do
     it '#average_review_rating' do
       expect(@user_1.average_review_rating.to_f.round(1)).to eq(3.7)
     end
-    it "#best_review" do
+    it '#best_review' do
       expect(@user_1.best_review).to eq(@review_1)
     end
-    it "#worst_review" do
+    it '#worst_review' do
       expect(@user_1.worst_review).to eq(@review_3)
+    end
+    it '#reviews?' do
+      expect(@user_1.reviews?).to eq(true)
+      expect(@user_2.reviews?).to eq(false)
     end
   end
 end
