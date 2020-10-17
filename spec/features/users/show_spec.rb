@@ -174,21 +174,21 @@ describe "as a visitor" do
                                 rating: 4,
                                 content: "Hello, IT. Have you tried turning it off and on again?",
                                 picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
-                                shelter_id: shelter_1.id,
+                                shelter_id: shelter_2.id,
                                 user_id: user_1.id)
 
       review_3 = Review.create!(title: "Great food",
                                 rating: 3,
                                 content: "I thought this was a restaurant but I was wrong. The bone-shaped cookies were good though.",
                                 picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg/594px-Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg",
-                                shelter_id: shelter_2.id,
+                                shelter_id: shelter_3.id,
                                 user_id: user_1.id)
 
       review_4 = Review.create!(title: "Good atmosphere",
                                 rating: 2,
                                 content: "Give me liberty or give me death.",
                                 picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg/594px-Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg",
-                                shelter_id: shelter_2.id,
+                                shelter_id: shelter_4.id,
                                 user_id: user_1.id)
 
       visit("/users/#{user_1.id}")

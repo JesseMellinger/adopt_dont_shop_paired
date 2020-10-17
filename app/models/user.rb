@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def worst_review
     reviews.order("rating").first
   end
+
+  def reviews?
+    reviews.count > 0
+  end
 end
