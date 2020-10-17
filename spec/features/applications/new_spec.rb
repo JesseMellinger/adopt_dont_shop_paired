@@ -26,12 +26,11 @@ describe "as a visitor" do
 
         fill_in("user_name", with: "Testy")
 
-        click_link("Submit Application")
+        click_button("Submit Application")
 
-        application_1 = Application.create!(status: "In Progress",
-                                            user_id: user_1.id)
+        application_1 = Application.find_by(user_id: user_1.id)
 
-        expect(current_path).to eq("/application/#{application_1.id}")
+        expect(current_path).to eq("/applications/#{application_1.id}")
 
         expect(page).to have_content("User Name: #{user_1.name}")
         expect(page).to have_content("Street Address: #{user_1.street_address}")
