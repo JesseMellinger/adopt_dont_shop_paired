@@ -11,6 +11,13 @@ require 'rails_helper'
 # And I see my user listed along with all of my address information
 # And I see an indicator that this application is "In Progress"
 
+# As a visitor
+# When I visit the new application page
+# And I fill in the form with the name of a User that doesn't exist in the database
+# And I click submit
+# Then I am taken back to the new applications page
+# And I see a message that the user could not be found.
+
 describe "as a visitor" do
   describe "when I'm on a new application page, I can complete a form" do
     describe "when I fill in this form with my user name and I click submit" do
@@ -39,6 +46,26 @@ describe "as a visitor" do
         expect(page).to have_content("Zip: #{user_1.zip}")
         expect(page).to have_content("Status: #{application_1.status}")
 
+      end
+    end
+    describe "when I fill in the form with the name of a User that doesn't exist in the database and I click submit" do
+      it "then I am taken back to the new applications page and I see a message that the user could not be found" do
+        user_1 = User.create!(name: "Testy",
+                              street_address: "221B Baker St.",
+                              city: "London",
+                              state: "CO",
+                              zip: "81650"
+                              )
+
+        visit("/applications/new")
+
+        fill_in("user_name", with: "Legolas")
+
+        click_button("Submit Application")
+
+        expect(page).to have_content("User could not be found")
+
+        expect(current_path).to eq("/applications/new")
       end
     end
   end
