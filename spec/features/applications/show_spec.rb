@@ -12,6 +12,16 @@
 # an Application can have MANY Pets THROUGH Pet Applications
 # a Pet can have MANY Applications THROUGH Pet Applications
 
+# As a visitor
+# When I visit an application's show page
+# And that application has not been submitted,
+# Then I see a section on the page to "Add a Pet to this Application"
+# In that section I see an input where I can search for Pets by name
+# When I fill in this field with a Pet's name
+# And I click submit,
+# Then I am taken back to the application show page
+# And under the search bar I see any Pet whose name matches my search
+
 require 'rails_helper'
 
 RSpec.describe "as a visitor" do
@@ -66,6 +76,71 @@ RSpec.describe "as a visitor" do
       expect(page).to have_content(application_1.status)
       expect(page).to have_link(pet_1.name, :href=>"/pets/#{pet_1.id}")
       expect(page).to have_link(pet_2.name, :href=>"/pets/#{pet_2.id}")
+    end
+    describe "and that application has not been submitted" do
+      it "then I see a section on the page to 'Add a Pet to this Application'" do
+        user_1 = User.create!(name: "Testy",
+                              street_address: "221B Baker St.",
+                              city: "London",
+                              state: "CO",
+                              zip: "81650"
+                              )
+
+        application_1 = Application.create!(description: "Well let's get some dogs.",
+                                            status: "In Progress",
+                                            user_id: user_1.id)
+
+        pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                            name: "Blue",
+                            approximate_age: "2",
+                            sex: "Female",
+                            shelter_id: shelter_1.id
+                            )
+
+        visit("/applications/#{application_1.id}")
+
+        within("#add-pets") do
+          expect(page).to have_content("Add a Pet to this Application: ")
+          fill_in("pet_name", with: "#{pet_1.name}")
+        end
+        describe "when I click 'Submit'" do
+          it "then I am taken back to the application show page and under the search bar I see any Pet whose name matches my search" do
+            user_1 = User.create!(name: "Testy",
+                                  street_address: "221B Baker St.",
+                                  city: "London",
+                                  state: "CO",
+                                  zip: "81650"
+                                  )
+
+            application_1 = Application.create!(description: "Well let's get some dogs.",
+                                                status: "In Progress",
+                                                user_id: user_1.id)
+
+            pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                name: "Blue",
+                                approximate_age: "2",
+                                sex: "Female",
+                                shelter_id: shelter_1.id
+                                )
+
+            visit("/applications/#{application_1.id}")
+
+            within("#add-pets") do
+              expect(page).to have_content("Add a Pet to this Application: ")
+              fill_in("pet_name", with: "#{pet_1.name}")
+              click_button("Submit")
+            end
+
+            expect(current_path).to eq("/applications/#{application_1.id}")
+
+            within("#add-pets") do
+              expect(page).to have_content("Add a Pet to this Application: ")
+              expect(page).to have_field("pet_name")
+              expect(page).to have_content(pet_1)
+            end
+          end
+        end
+      end
     end
   end
 end
