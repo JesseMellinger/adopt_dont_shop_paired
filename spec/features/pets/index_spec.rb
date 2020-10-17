@@ -40,7 +40,9 @@ describe "as a visitor" do
 
       visit("/pets")
 
-      expect(page).to have_link("Start an Application", :href=>"/applications/new")
+      click_link("Start an Application")
+
+      expect(current_path).to eq("/applications/new")
     end
   end
 end
