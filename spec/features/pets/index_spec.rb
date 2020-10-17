@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "as a visitor" do
-  describe "when I visit" do
+  describe "when I visit the pet index page" do
     it "I see each Pet in the system including the Pets image, name, approximate age, sex, and name of shelter where located" do
       shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
@@ -23,6 +23,26 @@ describe "as a visitor" do
       expect(page).to have_content("5")
       expect(page).to have_content("male")
       expect(page).to have_content("Animal Control and Shelter")
+    end
+    it "then I see a link to 'Start an Application'" do
+      shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                 address: "1400 Fairgrounds Road",
+                                 city: "Eagle",
+                                 state: "CO",
+                                 zip: "81631")
+
+      pet_1 = Pet.create!(image: "https://dogtime.com/assets/uploads/2018/10/puppies-cover.jpg",
+                         name: "Bolt",
+                         approximate_age: 5,
+                         sex: "male",
+                         name_of_shelter: "Animal Control and Shelter",
+                         shelter_id: shelter_1.id)
+
+      visit("/pets")
+
+      click_link("Start an Application")
+
+      expect(current_path).to eq("/applications/new")
     end
   end
 end
