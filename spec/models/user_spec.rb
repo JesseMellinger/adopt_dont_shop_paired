@@ -3,6 +3,7 @@ require 'rails_helper'
 describe User, type: :model do
   describe 'relationships' do
     it {should have_many :reviews}
+    it {should have_many :applications}
   end
 
   describe 'instance methods' do

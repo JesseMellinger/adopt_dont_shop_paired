@@ -49,10 +49,10 @@ RSpec.describe "as a visitor" do
                                           status: "In Progress",
                                           user_id: user_1.id)
 
-      PetApplications.create(pet_id: pet_1.id,
+      PetApplication.create!(pet_id: pet_1.id,
                              application_id: application_1.id)
 
-      PetApplications.create(pet_id: pet_2.id,
+      PetApplication.create!(pet_id: pet_2.id,
                              application_id: application_1.id)
 
       visit "/applications/#{application_1.id}"
@@ -64,8 +64,8 @@ RSpec.describe "as a visitor" do
       expect(page).to have_content(user_1.zip)
       expect(page).to have_content(application_1.description)
       expect(page).to have_content(application_1.status)
-      expect(page).to have_content(pet_1.name)
-      expect(page).to have_content(pet_2.name)
+      expect(page).to have_link(pet_1.name, :href=>"/pets/#{pet_1.id}")
+      expect(page).to have_link(pet_2.name, :href=>"/pets/#{pet_2.id}")
     end
   end
 end
