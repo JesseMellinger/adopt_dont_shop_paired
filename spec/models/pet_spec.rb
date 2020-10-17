@@ -1,9 +1,12 @@
 require 'rails_helper'
 
-describe Pet, type: :model do
-  describe "validations" do
-    it { should belong_to :shelter }
+describe Pet do
+  describe "relationships" do
+    it {should belong_to :shelter}
+    it {should have_many :pet_applications}
+    it {should have_many(:applications).through(:pet_applications)}
   end
+  
   describe "class methods" do
     it ".find_all_pets_by_shelter_id" do
       shelter_1 = Shelter.create!(name: "Eagle County Animal Services",

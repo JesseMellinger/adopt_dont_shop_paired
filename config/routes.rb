@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   patch '/shelters/:shelter_id/:review_id', to: 'shelter_reviews#update'
   delete '/shelters/:shelter_id/:review_id', to: 'shelter_reviews#destroy'
 
+
+  get '/applications/:id', to: 'applications#show'
 end
