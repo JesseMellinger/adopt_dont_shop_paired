@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_17_182204) do
+ActiveRecord::Schema.define(version: 2020_10_17_191600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "applications", force: :cascade do |t|
     t.string "description"
-    t.string "name_of_pets"
     t.string "status"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_applications_on_user_id"
