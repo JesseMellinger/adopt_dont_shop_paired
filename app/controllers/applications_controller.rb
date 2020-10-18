@@ -24,8 +24,16 @@ class ApplicationsController < ApplicationController
 
   end
 
+  def update
+    application = Application.find(params[:id])
+    application.update(description: params[:body],
+                       status: "Pending")
+
+    redirect_to "/applications/#{application.id}"
+  end
+
   private
   def application_params
-    params.permit(:status)
+    params.permit(:status, :description)
   end
 end

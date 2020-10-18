@@ -111,7 +111,7 @@ RSpec.describe "as a visitor" do
           fill_in("search", with: "#{pet_1.name}")
         end
       end
-      describe "when I click 'Submit'" do
+      describe "when I click 'Search'" do
         it "then I am taken back to the application show page and under the search bar I see any Pet whose name matches my search" do
           user_1 = User.create!(name: "Testy",
                                 street_address: "221B Baker St.",
@@ -143,7 +143,7 @@ RSpec.describe "as a visitor" do
           within("#add-pets") do
             expect(page).to have_selector("#search-label")
             fill_in("search", with: "#{pet_1.name}")
-            click_button("Submit")
+            click_button("Search")
           end
 
           expect(current_path).to eq("/applications/#{application_1.id}")
@@ -193,7 +193,7 @@ RSpec.describe "as a visitor" do
             within("#add-pets") do
               expect(page).to have_selector("#search-label")
               fill_in("search", with: "Blue")
-              click_button("Submit")
+              click_button("Search")
             end
 
             expect(current_path).to eq("/applications/#{application_1.id}")
@@ -220,6 +220,114 @@ RSpec.describe "as a visitor" do
             expect(current_path).to eq("/applications/#{application_1.id}")
 
             expect(page).to have_link("#{pet_2.name}")
+          end
+        end
+        describe "when I have added one or more pets to my application" do
+          describe "then I see a section to submit my application wherein I see an input to enter why I would make a good owner for these pet(s)" do
+            it "I fill in the input and I click a button to submit this application which takes me back to the application's show page" do
+              user_1 = User.create!(name: "Testy",
+                                    street_address: "221B Baker St.",
+                                    city: "London",
+                                    state: "CO",
+                                    zip: "81650")
+
+              shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                         address: "1400 Fairgrounds Road",
+                                         city: "Eagle",
+                                         state: "CO",
+                                         zip: "81631")
+
+
+              application_1 = Application.create!(description: "Well let's get some dogs.",
+                                                  status: "In Progress",
+                                                  user_id: user_1.id)
+
+              pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                  name: "Blue",
+                                  approximate_age: "2",
+                                  sex: "Female",
+                                  shelter_id: shelter_1.id)
+
+              visit("/applications/#{application_1.id}")
+
+              within("#add-pets") do
+                expect(page).to have_selector("#search-label")
+                fill_in("search", with: "Blue")
+                click_button("Search")
+              end
+
+              within("#pet-#{pet_1.id}") do
+                expect(page).to have_content(pet_1.name)
+                expect(page).to have_content(pet_1.approximate_age)
+                expect(page).to have_content(pet_1.sex)
+                click_button("Adopt this Pet")
+              end
+
+              fill_in("Why would you make a good owner for these pets?", with: "I love that journey for me.")
+
+              click_button("Submit Application")
+
+              expect(current_path).to eq("/applications/#{application_1.id}")
+            end
+            it "I see an indicator that the application is 'Pending', I see all the pets that I want to adopt, and I do not see a section to add more pets to this application" do
+              user_1 = User.create!(name: "Testy",
+                                    street_address: "221B Baker St.",
+                                    city: "London",
+                                    state: "CO",
+                                    zip: "81650")
+
+              shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                         address: "1400 Fairgrounds Road",
+                                         city: "Eagle",
+                                         state: "CO",
+                                         zip: "81631")
+
+
+              application_1 = Application.create!(description: "Well let's get some dogs.",
+                                                  status: "In Progress",
+                                                  user_id: user_1.id)
+
+              pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                  name: "Blue",
+                                  approximate_age: "2",
+                                  sex: "Female",
+                                  shelter_id: shelter_1.id)
+
+              pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikGCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                  name: "Blue",
+                                  approximate_age: "5",
+                                  sex: "Male",
+                                  shelter_id: shelter_1.id)
+
+              visit("/applications/#{application_1.id}")
+
+              within("#add-pets") do
+                expect(page).to have_selector("#search-label")
+                fill_in("search", with: "Blue")
+                click_button("Search")
+              end
+
+              within("#pet-#{pet_1.id}") do
+                expect(page).to have_content(pet_1.name)
+                expect(page).to have_content(pet_1.approximate_age)
+                expect(page).to have_content(pet_1.sex)
+                click_button("Adopt this Pet")
+              end
+
+              fill_in("Why would you make a good owner for these pets?", with: "I love that journey for me.")
+
+              click_button("Submit Application")
+
+              expect(current_path).to eq("/applications/#{application_1.id}")
+
+              within("#status") do
+                expect(page).to have_content("Pending")
+              end
+
+              expect(page).to have_link("#{pet_1.name}")
+
+              expect(page).to have_no_selector("#add-pets")
+            end
           end
         end
       end
