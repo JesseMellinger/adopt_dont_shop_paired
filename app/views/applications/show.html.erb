@@ -13,10 +13,12 @@
   <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: "get" %>
 <% end %></br></br>
 
-<%= form_tag "/applications/#{@application.id}", method: :patch do %>
-  <label for="description-field">Why would you make a good owner for these pets?</label></br>
-  <%= text_area_tag(:body, params[:body], :id=>"description-field", cols: 50, rows: 4) %></br>
-  <%= submit_tag "Submit Application" %>
+<% if !@application.pets.empty? %>
+  <%= form_tag "/applications/#{@application.id}", method: :patch, :id=>'description-area' do %>
+    <label for="description-field">Why would you make a good owner for these pets?</label></br>
+    <%= text_area_tag(:body, params[:body], :id=>"description-field", cols: 50, rows: 4) %></br>
+    <%= submit_tag "Submit Application" %>
+    <% end %>
 <% end %>
 
 <% if @application.status == "In Progress" %>
