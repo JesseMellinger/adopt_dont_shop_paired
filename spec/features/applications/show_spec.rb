@@ -157,6 +157,71 @@ RSpec.describe "as a visitor" do
           expect(page).to have_content(pet_1.approximate_age)
           expect(page).to have_content(pet_1.sex)
         end
+        describe "when I see the names of Pets that matches my search" do
+          it "then next to each Pet's name I see a button to 'Adopt this Pet' and I am taken back to the application show page when I click one of these buttons and see the Pet I want to adopt listed on this application" do
+            user_1 = User.create!(name: "Testy",
+                                  street_address: "221B Baker St.",
+                                  city: "London",
+                                  state: "CO",
+                                  zip: "81650")
+
+            shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                       address: "1400 Fairgrounds Road",
+                                       city: "Eagle",
+                                       state: "CO",
+                                       zip: "81631")
+
+
+            application_1 = Application.create!(description: "Well let's get some dogs.",
+                                                status: "In Progress",
+                                                user_id: user_1.id)
+
+            pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                name: "Blue",
+                                approximate_age: "2",
+                                sex: "Female",
+                                shelter_id: shelter_1.id)
+
+            pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikipedi8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                name: "Blue",
+                                approximate_age: "5",
+                                sex: "Male",
+                                shelter_id: shelter_1.id)
+
+            visit("/applications/#{application_1.id}")
+
+            within("#add-pets") do
+              expect(page).to have_selector("#search-label")
+              fill_in("search", with: "Blue")
+              click_button("Submit")
+            end
+
+            expect(current_path).to eq("/applications/#{application_1.id}")
+
+            within("#add-pets") do
+              expect(page).to have_selector("#search-label")
+              expect(page).to have_field("search")
+            end
+
+            within("#pet-#{pet_1.id}") do
+              expect(page).to have_content(pet_1.name)
+              expect(page).to have_content(pet_1.approximate_age)
+              expect(page).to have_content(pet_1.sex)
+              expect(page).to have_button("Adopt this Pet")
+            end
+
+            within("#pet-#{pet_2.id}") do
+              expect(page).to have_content(pet_2.name)
+              expect(page).to have_content(pet_2.approximate_age)
+              expect(page).to have_content(pet_2.sex)
+              click_button("Adopt this Pet")
+            end
+
+            expect(current_path).to eq("/applications/#{application_1.id}")
+
+            expect(page).to have_link("#{pet_2.name}")
+          end
+        end
       end
     end
   end

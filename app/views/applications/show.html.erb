@@ -8,6 +8,7 @@
 <p>Description: <%= @application.description %></p>
 <p>Status: <%= @application.status %></p>
 
+<h2>Pets on Application: </h2>
 <% @application.pets.each do |pet| %>
   <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: "get" %>
 <% end %>
@@ -19,7 +20,10 @@
 <% end %>
 
 <% @search_results.each do |pet| %>
-  <h3><%= pet.name %></h3>
-  <p><%= pet.approximate_age %></p>
-  <p><%= pet.sex %></p>
+  <section id="pet-<%= pet.id %>">
+    <h3><%= pet.name %></h3>
+    <p><%= pet.approximate_age %></p>
+    <p><%= pet.sex %></p>
+    <%= button_to 'Adopt this Pet', "/pets/#{pet.id}/#{@application.id}"  %>
+  </section>
 <% end %>
