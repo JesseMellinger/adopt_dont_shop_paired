@@ -6,7 +6,7 @@
 <p>State: <%= @application.user.state %></p>
 <p>Zip: <%= @application.user.zip %></p>
 <p>Description: <%= @application.description %></p>
-<p>Status: <%= @application.status %></p>
+<p id="status">Status: <%= @application.status %></p>
 
 <h2>Pets on Application: </h2>
 <% @application.pets.each do |pet| %>
