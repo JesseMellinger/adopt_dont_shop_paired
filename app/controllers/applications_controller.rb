@@ -26,10 +26,18 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    application.update(description: params[:body],
-                       status: "Pending")
 
-    redirect_to "/applications/#{application.id}"
+    if !params[:body].empty?
+      application.update(description: params[:body],
+                         status: "Pending")
+
+      redirect_to "/applications/#{application.id}"
+    else
+      flash[:notice] = "Please tell us why you would make a good owner."
+      
+      redirect_to "/applications/#{application.id}"
+    end
+
   end
 
   private

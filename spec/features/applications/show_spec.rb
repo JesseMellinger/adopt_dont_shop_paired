@@ -361,7 +361,7 @@ RSpec.describe "as a visitor" do
                                 shelter_id: shelter_1.id)
 
             visit("/applications/#{application_1.id}")
-            
+
             expect(page).to have_no_selector("#description-area")
 
             within("#add-pets") do
@@ -378,6 +378,63 @@ RSpec.describe "as a visitor" do
             end
 
             expect(page).to have_selector("#description-area")
+          end
+        end
+      end
+      describe "when I fail to enter why I would make a good owner for these pet(s)" do
+        it "then I am taken back to the application's show page, and I see a flash message that I need to fill out that field before I can submit the application, and I see my application is still 'In Progress'" do
+          user_1 = User.create!(name: "Testy",
+                                street_address: "221B Baker St.",
+                                city: "London",
+                                state: "CO",
+                                zip: "81650")
+
+          shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                     address: "1400 Fairgrounds Road",
+                                     city: "Eagle",
+                                     state: "CO",
+                                     zip: "81631")
+
+
+          application_1 = Application.create!(description: "Well let's get some dogs.",
+                                              status: "In Progress",
+                                              user_id: user_1.id)
+
+          pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                              name: "Blue",
+                              approximate_age: "2",
+                              sex: "Female",
+                              shelter_id: shelter_1.id)
+
+          pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikipedi8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                              name: "Blue",
+                              approximate_age: "5",
+                              sex: "Male",
+                              shelter_id: shelter_1.id)
+
+          visit("/applications/#{application_1.id}")
+
+          within("#add-pets") do
+            expect(page).to have_selector("#search-label")
+            fill_in("search", with: "Blue")
+            click_button("Search")
+          end
+
+          within("#pet-#{pet_2.id}") do
+            expect(page).to have_content(pet_2.name)
+            expect(page).to have_content(pet_2.approximate_age)
+            expect(page).to have_content(pet_2.sex)
+            click_button("Adopt this Pet")
+          end
+
+          click_button("Submit Application")
+
+          expect(current_path).to eq("/applications/#{application_1.id}")
+
+          expect(page).to have_content("Please tell us why you would make a good owner.")
+
+          within("#status") do
+            expect(page).to have_content("In Progress")
           end
         end
       end
