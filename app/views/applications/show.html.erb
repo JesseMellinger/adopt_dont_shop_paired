@@ -11,19 +11,27 @@
 <h2>Pets on Application: </h2>
 <% @application.pets.each do |pet| %>
   <%= link_to "#{pet.name}", "/pets/#{pet.id}", method: "get" %>
+<% end %></br></br>
+
+<%= form_tag "/applications/#{@application.id}", method: :patch do %>
+  <label for="description-field">Why would you make a good owner for these pets?</label></br>
+  <%= text_area_tag(:body, params[:body], :id=>"description-field", cols: 50, rows: 4) %></br>
+  <%= submit_tag "Submit Application" %>
 <% end %>
 
-<%= form_tag "/applications/#{@application.id}", method: :get, :id=>'add-pets' do %>
-    <p id="search-label">Add a Pet to this Application: </p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Submit" %>
-<% end %>
+<% if @application.status == "In Progress" %>
+  <%= form_tag "/applications/#{@application.id}", method: :get, :id=>'add-pets' do %>
+      <p id="search-label">Add a Pet to this Application: </p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+  <% end %>
 
-<% @search_results.each do |pet| %>
-  <section id="pet-<%= pet.id %>">
-    <h3><%= pet.name %></h3>
-    <p><%= pet.approximate_age %></p>
-    <p><%= pet.sex %></p>
-    <%= button_to 'Adopt this Pet', "/pets/#{pet.id}/#{@application.id}"  %>
-  </section>
+  <% @search_results.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+      <h3><%= pet.name %></h3>
+      <p><%= pet.approximate_age %></p>
+      <p><%= pet.sex %></p>
+      <%= button_to 'Adopt this Pet', "/pets/#{pet.id}/#{@application.id}"  %>
+    </section>
+  <% end %>
 <% end %>

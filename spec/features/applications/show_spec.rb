@@ -111,7 +111,7 @@ RSpec.describe "as a visitor" do
           fill_in("search", with: "#{pet_1.name}")
         end
       end
-      describe "when I click 'Submit'" do
+      describe "when I click 'Search'" do
         it "then I am taken back to the application show page and under the search bar I see any Pet whose name matches my search" do
           user_1 = User.create!(name: "Testy",
                                 street_address: "221B Baker St.",
@@ -143,7 +143,7 @@ RSpec.describe "as a visitor" do
           within("#add-pets") do
             expect(page).to have_selector("#search-label")
             fill_in("search", with: "#{pet_1.name}")
-            click_button("Submit")
+            click_button("Search")
           end
 
           expect(current_path).to eq("/applications/#{application_1.id}")
@@ -193,7 +193,7 @@ RSpec.describe "as a visitor" do
             within("#add-pets") do
               expect(page).to have_selector("#search-label")
               fill_in("search", with: "Blue")
-              click_button("Submit")
+              click_button("Search")
             end
 
             expect(current_path).to eq("/applications/#{application_1.id}")
@@ -253,13 +253,13 @@ RSpec.describe "as a visitor" do
               within("#add-pets") do
                 expect(page).to have_selector("#search-label")
                 fill_in("search", with: "Blue")
-                click_button("Submit")
+                click_button("Search")
               end
 
               within("#pet-#{pet_1.id}") do
-                expect(page).to have_content(pet_2.name)
-                expect(page).to have_content(pet_2.approximate_age)
-                expect(page).to have_content(pet_2.sex)
+                expect(page).to have_content(pet_1.name)
+                expect(page).to have_content(pet_1.approximate_age)
+                expect(page).to have_content(pet_1.sex)
                 click_button("Adopt this Pet")
               end
 
@@ -304,13 +304,13 @@ RSpec.describe "as a visitor" do
               within("#add-pets") do
                 expect(page).to have_selector("#search-label")
                 fill_in("search", with: "Blue")
-                click_button("Submit")
+                click_button("Search")
               end
 
               within("#pet-#{pet_1.id}") do
-                expect(page).to have_content(pet_2.name)
-                expect(page).to have_content(pet_2.approximate_age)
-                expect(page).to have_content(pet_2.sex)
+                expect(page).to have_content(pet_1.name)
+                expect(page).to have_content(pet_1.approximate_age)
+                expect(page).to have_content(pet_1.sex)
                 click_button("Adopt this Pet")
               end
 
@@ -320,7 +320,9 @@ RSpec.describe "as a visitor" do
 
               expect(current_path).to eq("/applications/#{application_1.id}")
 
-              expect(page).to have_selector("#status", :value =>"Pending")
+              within("#status") do
+                expect(page).to have_content("Pending")
+              end
 
               expect(page).to have_link("#{pet_1.name}")
 
