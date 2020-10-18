@@ -330,6 +330,56 @@ RSpec.describe "as a visitor" do
             end
           end
         end
+        describe "when I have not added any pets to the application" do
+          it "then I do not see a section to submit my application" do
+            user_1 = User.create!(name: "Testy",
+                                  street_address: "221B Baker St.",
+                                  city: "London",
+                                  state: "CO",
+                                  zip: "81650")
+
+            shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                       address: "1400 Fairgrounds Road",
+                                       city: "Eagle",
+                                       state: "CO",
+                                       zip: "81631")
+
+
+            application_1 = Application.create!(status: "In Progress",
+                                                user_id: user_1.id)
+
+            pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                name: "Blue",
+                                approximate_age: "2",
+                                sex: "Female",
+                                shelter_id: shelter_1.id)
+
+            pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikGCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                                name: "Blue",
+                                approximate_age: "5",
+                                sex: "Male",
+                                shelter_id: shelter_1.id)
+
+            visit("/applications/#{application_1.id}")
+            
+            expect(page).to have_no_selector("#description-area")
+
+            within("#add-pets") do
+              expect(page).to have_selector("#search-label")
+              fill_in("search", with: "Blue")
+              click_button("Search")
+            end
+
+            within("#pet-#{pet_1.id}") do
+              expect(page).to have_content(pet_1.name)
+              expect(page).to have_content(pet_1.approximate_age)
+              expect(page).to have_content(pet_1.sex)
+              click_button("Adopt this Pet")
+            end
+
+            expect(page).to have_selector("#description-area")
+          end
+        end
       end
     end
   end
