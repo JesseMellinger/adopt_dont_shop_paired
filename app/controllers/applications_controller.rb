@@ -2,7 +2,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    @search_results = Pet.where(name: params[:search])
+    @search_results = Pet.where("name like ?", "%#{params[:search]}%")
   end
 
   def new
@@ -34,7 +34,7 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     else
       flash[:notice] = "Please tell us why you would make a good owner."
-      
+
       redirect_to "/applications/#{application.id}"
     end
 
