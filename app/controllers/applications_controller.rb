@@ -2,6 +2,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @search_results = Pet.where(name: params[:search])
   end
 
   def new
@@ -22,7 +23,6 @@ class ApplicationsController < ApplicationController
     end
 
   end
-
 
   private
   def application_params

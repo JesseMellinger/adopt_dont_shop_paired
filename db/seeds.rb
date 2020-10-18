@@ -87,3 +87,17 @@ review_4 = Review.create!(title: "Good atmosphere",
                           picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg/594px-Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg",
                           shelter_id: shelter_3.id,
                           user_id: user_1.id)
+
+#Pets
+
+pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                    name: "Blue",
+                    approximate_age: "2",
+                    sex: "Female",
+                    shelter_id: shelter_1.id)
+
+pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+                    name: "John Cougar Mellencamp",
+                    approximate_age: "4",
+                    sex: "Male",
+                    shelter_id: shelter_1.id)
