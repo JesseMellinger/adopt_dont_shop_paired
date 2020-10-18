@@ -1,0 +1,13 @@
+<h1>Admin</h1>
+<h1>Application Number: <%= @application.id %></h1>
+
+<% @application.pets.each do |pet| %>
+  <section id="pet-<%= pet.id %>">
+    <h3><%= pet.name %></h3>
+    <img src="<%= pet.image %>">
+    <p><%= pet.approximate_age %></p>
+    <p><%= pet.sex %></p>
+    <p><%= pet.shelter.name %></p>
+    <%= button_to 'Approve Pet', "/pets/#{pet.id}/#{@application.id}"  %>
+  </section>
+<% end %>
