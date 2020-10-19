@@ -1,10 +1,18 @@
 <h1>Admin</h1>
 <h1>Application Number: <%= @application.id %></h1>
 
+<h2>User Name: <%= @application.user.name %></h2>
+<p>Street Address: <%= @application.user.street_address %></p>
+<p>City: <%= @application.user.city %></p>
+<p>State: <%= @application.user.state %></p>
+<p>Zip: <%= @application.user.zip %></p>
+<p>Description: <%= @application.description %></p>
+<p id="status">Status: <%= @application.status %></p>
+
+<h2>Pets on Application: </h2>
 <% @application.pets.each do |pet| %>
   <section id="pet-<%= pet.id %>">
     <h3><%= pet.name %></h3>
-    <img src="<%= pet.image %>">
     <p><%= pet.approximate_age %></p>
     <p><%= pet.sex %></p>
     <p><%= pet.shelter.name %></p>

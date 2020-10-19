@@ -1,7 +1,7 @@
 class AdminApplicationsController < ApplicationController
 
   def show
-    @application = Application.find(param[:id])
+    @application = Application.find(params[:id])
   end
 
 end

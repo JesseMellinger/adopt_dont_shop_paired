@@ -30,43 +30,36 @@ describe "as a visitor" do
                                             status: "In Progress",
                                             user_id: user_1.id)
 
-        pet_1 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
-                            name: "Blue",
+        pet_1 = Pet.create!(name: "Blue",
                             approximate_age: "2",
                             sex: "Female",
                             shelter_id: shelter_1.id)
 
-        pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
-                            name: "Mr. Blue",
+        pet_2 = Pet.create!(name: "Mr. Blue",
                             approximate_age: "6",
                             sex: "Female",
                             shelter_id: shelter_1.id)
+
+        PetApplication.create!(pet_id: pet_1.id,
+                               application_id: application_1.id)
+
+        PetApplication.create!(pet_id: pet_2.id,
+                               application_id: application_1.id)
 
         visit("/admin/applications/#{application_1.id}")
 
         within("#pet-#{pet_1.id}") do
           expect(page).to have_content(pet_1.name)
-          expect(page).to have_content(pet_1.image)
           expect(page).to have_content(pet_1.approximate_age)
           expect(page).to have_content(pet_1.sex)
           expect(page).to have_content(pet_1.shelter.name)
           click_button("Approve Pet")
         end
-
-        within("#pet-#{pet_2.id}") do
-          expect(page).to have_content(pet_2.name)
-          expect(page).to have_content(pet_2.image)
-          expect(page).to have_content(pet_2.approximate_age)
-          expect(page).to have_content(pet_2.sex)
-          expect(page).to have_content(pet_2.shelter.name)
-          expect(page).to have_button("Approve Pet")
-        end
-
+save_and_open_page
         visit("/admin/applications/#{application_1.id}")
 
         within("#pet-#{pet_1.id}") do
           expect(page).to have_content(pet_1.name)
-          expect(page).to have_content(pet_1.image)
           expect(page).to have_content(pet_1.approximate_age)
           expect(page).to have_content(pet_1.sex)
           expect(page).to have_content(pet_1.shelter.name)
@@ -76,12 +69,11 @@ describe "as a visitor" do
 
         within("#pet-#{pet_2.id}") do
           expect(page).to have_content(pet_2.name)
-          expect(page).to have_content(pet_2.image)
           expect(page).to have_content(pet_2.approximate_age)
           expect(page).to have_content(pet_2.sex)
           expect(page).to have_content(pet_2.shelter.name)
           expect(page).to have_button("Approve Pet")
-        end    
+        end
       end
     end
   end
