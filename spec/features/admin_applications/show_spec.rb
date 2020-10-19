@@ -26,7 +26,7 @@ describe "as a visitor" do
                                    zip: "81631"
                                    )
 
-        application_1 = Application.create!(description: "Well let's get some dogs.",
+        application_1 = Application.create!(description: "",
                                             status: "In Progress",
                                             user_id: user_1.id)
 
@@ -40,11 +40,29 @@ describe "as a visitor" do
                             sex: "Female",
                             shelter_id: shelter_1.id)
 
-        PetApplication.create!(pet_id: pet_1.id,
-                               application_id: application_1.id)
+        visit("/applications/#{application_1.id}")
 
-        PetApplication.create!(pet_id: pet_2.id,
-                               application_id: application_1.id)
+        within("#add-pets") do
+          fill_in("search", with: "#{pet_1.name}")
+          click_button("Search")
+        end
+
+        within("#pet-#{pet_1.id}") do
+          click_button("Adopt this Pet")
+        end
+
+        within("#add-pets") do
+          fill_in("search", with: "#{pet_1.name}")
+          click_button("Search")
+        end
+        
+        within("#pet-#{pet_2.id}") do
+          click_button("Adopt this Pet")
+        end
+
+        fill_in("Why would you make a good owner for these pets?", with: "I love that journey for me.")
+
+        click_button("Submit Application")
 
         visit("/admin/applications/#{application_1.id}")
 
@@ -55,7 +73,7 @@ describe "as a visitor" do
           expect(page).to have_content(pet_1.shelter.name)
           click_button("Approve Pet")
         end
-save_and_open_page
+
         visit("/admin/applications/#{application_1.id}")
 
         within("#pet-#{pet_1.id}") do

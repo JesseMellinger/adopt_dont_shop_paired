@@ -16,6 +16,10 @@
     <p><%= pet.approximate_age %></p>
     <p><%= pet.sex %></p>
     <p><%= pet.shelter.name %></p>
-    <%= button_to 'Approve Pet', "/pets/#{pet.id}/#{@application.id}"  %>
+    <% if @application.pet_application.approved? %>
+      <p>Approved</p>
+    <% else %>
+      <%= button_to 'Approve Pet', "/admin/applications/#{@application.id}", method: "patch"  %>
+    <% end %>
   </section>
 <% end %>
