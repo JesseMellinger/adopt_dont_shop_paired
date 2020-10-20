@@ -6,8 +6,8 @@ describe PetApplication do
     it {should belong_to :application}
   end
 
-  describe "instance methods" do
-    it "#approved?" do
+  describe "class methods" do
+    it ".find_pet_application" do
       user_1 = User.create!(name: "Testy",
                             street_address: "221B Baker St.",
                             city: "London",
@@ -38,10 +38,9 @@ describe PetApplication do
                           shelter_id: shelter_1.id)
 
       pet_application_1 = PetApplication.create!(pet_id: pet_1.id,
-                             application_id: application_1.id,
-                             status: "rejected")
+                             application_id: application_1.id)
 
-      expect(pet_application_1.approved?).to eq(false)
+      expect(PetApplication.find_pet_application(pet_1.id, application_1.id).first).to eq(pet_application_1)
     end
   end
 end
