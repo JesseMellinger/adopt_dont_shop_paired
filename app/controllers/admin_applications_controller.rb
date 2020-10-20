@@ -11,6 +11,7 @@ class AdminApplicationsController < ApplicationController
       @pet_application.update(status: "approved")
       if application_approved?(@application)
         @application.update(status: "Approved")
+        adopt_all_pets(@application)
         redirect_to "/admin/applications/#{params[:application_id]}"
       else
         redirect_to "/admin/applications/#{params[:application_id]}"
@@ -28,4 +29,9 @@ class AdminApplicationsController < ApplicationController
     end
   end
 
+  def adopt_all_pets(application)
+    application.pets.each do |pet|
+      pet.update(adoption_status: "adopted")
+    end
+  end
 end

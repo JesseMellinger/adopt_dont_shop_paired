@@ -357,7 +357,8 @@ describe "as a visitor" do
           pet_1 = Pet.create!(name: "Blue",
                               approximate_age: "2",
                               sex: "Female",
-                              shelter_id: shelter_1.id)
+                              shelter_id: shelter_1.id,
+                              adoption_status: "adopted")
 
           pet_application_1 = PetApplication.create!(pet_id: pet_1.id,
                                                      application_id: application_1.id,
@@ -372,7 +373,7 @@ describe "as a visitor" do
             expect(page).to have_no_button("Approve Pet")
             expect(page).to have_no_button("Reject Pet")
             expect(page).to have_content("This pet has been approved for adoption")
-          end                                       
+          end
         end
       end
     end
