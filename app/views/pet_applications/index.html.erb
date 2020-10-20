@@ -1,0 +1,7 @@
+<h1>Pet's Application Index Page</h1>
+
+<% @pet_applications.each do |pet_application| %>
+  <section id="applicant-<%= pet_application.application.user_id %>">
+    <%= link_to pet_application.application.user.name, "/applications/#{pet_application.application_id}", method: "get" %>
+  </section>
+<% end %>
