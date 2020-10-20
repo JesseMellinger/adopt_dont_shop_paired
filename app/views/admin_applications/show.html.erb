@@ -10,16 +10,18 @@
 <p id="status">Status: <%= @application.status %></p>
 
 <h2>Pets on Application: </h2>
-<% @application.pets.each do |pet| %>
-  <section id="pet-<%= pet.id %>">
-    <h3><%= pet.name %></h3>
-    <p><%= pet.approximate_age %></p>
-    <p><%= pet.sex %></p>
-    <p><%= pet.shelter.name %></p>
-    <% if @application.pet_application.approved? %>
+<% @application.pet_applications.each do |pet_application| %>
+  <section id="pet-<%= pet_application.pet_id %>">
+    <h3><%= pet_application.pet.name %></h3>
+    <p><%= pet_application.pet.approximate_age %></p>
+    <p><%= pet_application.pet.sex %></p>
+    <p><%= pet_application.pet.shelter.name %></p>
+    <% if pet_application.approved? %>
       <p>Approved</p>
     <% else %>
-      <%= button_to 'Approve Pet', "/admin/applications/#{@application.id}", method: "patch"  %>
+      <%= form_tag "/admin/applications/#{@application.id}/#{pet_application.pet_id}", method: :patch do %>
+      <%= submit_tag "Approve Pet" %>
+      <% end %>
     <% end %>
   </section>
 <% end %>
