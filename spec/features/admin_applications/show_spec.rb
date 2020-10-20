@@ -323,5 +323,58 @@ describe "as a visitor" do
         end
       end
     end
+    describe "when a pet is on a fully 'Approved' application" do
+      describe "and when that same pet is on a 'Pending' application
+      and I visit the admin application show page for that pending application" do
+        it "then next to the pet I do not see a button to approve or reject them
+        and instead I see a message that this pet has been approved for adoption" do
+          user_1 = User.create!(name: "Testy",
+                                street_address: "221B Baker St.",
+                                city: "London",
+                                state: "CO",
+                                zip: "81650")
+
+          user_2 = User.create!(name: "Tyrion Lannister",
+                                street_address: "282 Kevin Brook",
+                                city: "Lannisport",
+                                state: "CA",
+                                zip: "58517")
+
+          shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                     address: "1400 Fairgrounds Road",
+                                     city: "Eagle",
+                                     state: "CO",
+                                     zip: "81631")
+
+          application_1 = Application.create!(description: "I love that journey for me.",
+                                              status: "Approved",
+                                              user_id: user_1.id)
+
+          application_2 = Application.create!(description: "I'm worried Blue has already been adopted",
+                                              status: "Pending",
+                                              user_id: user_2.id)
+
+          pet_1 = Pet.create!(name: "Blue",
+                              approximate_age: "2",
+                              sex: "Female",
+                              shelter_id: shelter_1.id)
+
+          pet_application_1 = PetApplication.create!(pet_id: pet_1.id,
+                                                     application_id: application_1.id,
+                                                     status: "Approved")
+
+          pet_application_2 = PetApplication.create!(pet_id: pet_1.id,
+                                                     application_id: application_2.id)
+
+          visit("/admin/applications/#{application_2.id}")
+
+          within("#pet-#{pet_1.id}") do
+            expect(page).to have_no_button("Approve Pet")
+            expect(page).to have_no_button("Reject Pet")
+            expect(page).to have_content("This pet has been approved for adoption")
+          end                                       
+        end
+      end
+    end
   end
 end
