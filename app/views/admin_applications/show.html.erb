@@ -14,6 +14,8 @@
       <p>Approved</p>
     <% elsif pet_application.status == "rejected" %>
       <p>Rejected</p>
+    <% elsif pet_application.pet.adoption_status == "adopted" %>
+      <p>This pet has been approved for adoption</p>
     <% else %>
       <%= form_tag "/admin/applications/#{@application.id}/#{pet_application.pet_id}", method: :patch do %>
       <%= submit_tag "Approve Pet" %>
