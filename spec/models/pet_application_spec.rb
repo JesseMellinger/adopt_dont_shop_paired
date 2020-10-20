@@ -40,7 +40,7 @@ describe PetApplication do
       pet_application_1 = PetApplication.create!(pet_id: pet_1.id,
                              application_id: application_1.id)
 
-      expect(PetApplication.find_pet_application(pet_1.id, application_1.id).first).to eq(pet_application_1)
+      expect(PetApplication.find_pet_application(pet_1.id, application_1.id)).to eq(pet_application_1)
     end
   end
 end
