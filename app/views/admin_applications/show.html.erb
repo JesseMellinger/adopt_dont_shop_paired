@@ -1,0 +1,27 @@
+<h1>Admin</h1>
+<h1>Application Number: <%= @application.id %></h1>
+
+<h2>User Name: <%= @application.user.name %></h2>
+<p>Street Address: <%= @application.user.street_address %></p>
+<p>City: <%= @application.user.city %></p>
+<p>State: <%= @application.user.state %></p>
+<p>Zip: <%= @application.user.zip %></p>
+<p>Description: <%= @application.description %></p>
+<p id="status">Status: <%= @application.status %></p>
+
+<h2>Pets on Application: </h2>
+<% @application.pet_applications.each do |pet_application| %>
+  <section id="pet-<%= pet_application.pet_id %>">
+    <h3><%= pet_application.pet.name %></h3>
+    <p><%= pet_application.pet.approximate_age %></p>
+    <p><%= pet_application.pet.sex %></p>
+    <p><%= pet_application.pet.shelter.name %></p>
+    <% if pet_application.approved? %>
+      <p>Approved</p>
+    <% else %>
+      <%= form_tag "/admin/applications/#{@application.id}/#{pet_application.pet_id}", method: :patch do %>
+      <%= submit_tag "Approve Pet" %>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>

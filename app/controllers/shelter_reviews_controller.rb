@@ -24,6 +24,7 @@ class ShelterReviewsController < ApplicationController
     end
   end
 
+  #MVC
   def edit
     @shelter = Shelter.find(params[:shelter_id])
     @review = Review.find(params[:review_id])

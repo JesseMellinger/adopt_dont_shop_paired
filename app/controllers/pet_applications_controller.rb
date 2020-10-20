@@ -1,7 +1,8 @@
 class PetApplicationsController < ApplicationController
 
   def create
-    PetApplication.create(pet_applications_params)
+    pet_application = PetApplication.create(pet_applications_params)
+    pet_application.update(status: "rejected")
 
     redirect_to "/applications/#{params[:application_id]}"
   end
