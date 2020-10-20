@@ -37,7 +37,7 @@ describe Pet do
                           adoption_status: "adoptable",
                           shelter_id: shelter_1.id)
 
-      expect(Pet.find_all_pets_by_shelter_id(shelter_1.id.to_s).count).to eq(2)
+      expect(Pet.find_all_pets_by_shelter_id(shelter_1.id).count).to eq(2)
     end
   end
 end
