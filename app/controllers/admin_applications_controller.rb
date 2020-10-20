@@ -9,11 +9,16 @@ class AdminApplicationsController < ApplicationController
     @application = Application.find(params[:application_id])
     if params[:commit] == "Approve Pet"
       @pet_application.update(status: "approved")
-      @application.update(status: "Approved") if application_approved?(@application)
-      redirect_to "admin/applications/#{params[:application_id]}"
+      if application_approved?(@application)
+        @application.update(status: "Approved")
+        redirect_to "/admin/applications/#{params[:application_id]}"
+      else
+        redirect_to "/admin/applications/#{params[:application_id]}"
+      end
     else
       @pet_application.update(status: "rejected")
-      redirect_to "admin/applications/#{params[:application_id]}"
+      @application.update(status: "Rejected")
+      redirect_to "/admin/applications/#{params[:application_id]}"
     end
   end
 
