@@ -3,6 +3,7 @@ class PetApplication < ApplicationRecord
   belongs_to :application
 
   def approved?
+    
     status == "approved"
   end
 

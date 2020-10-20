@@ -16,11 +16,14 @@
     <p><%= pet_application.pet.approximate_age %></p>
     <p><%= pet_application.pet.sex %></p>
     <p><%= pet_application.pet.shelter.name %></p>
-    <% if pet_application.approved? %>
+    <% if pet_application.status == "approved" %>
       <p>Approved</p>
+    <% elsif pet_application.status == "rejected" %>
+      <p>Rejected</p>
     <% else %>
       <%= form_tag "/admin/applications/#{@application.id}/#{pet_application.pet_id}", method: :patch do %>
       <%= submit_tag "Approve Pet" %>
+      <%= submit_tag "Reject Pet" %>
       <% end %>
     <% end %>
   </section>
