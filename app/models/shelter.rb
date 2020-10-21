@@ -11,6 +11,16 @@ class Shelter < ApplicationRecord
   end
 
   def number_of_applications
-    Shelter.joins(pets: [:applications]).count
+    pets.reduce(0) do |coll, pet|
+      coll += pet.applications.count
+      coll
+    end
   end
+
+  def has_pets_on_approved_applications?
+    pets.any? do |pet|
+      pet.on_approved_application?
+    end
+  end
+
 end
