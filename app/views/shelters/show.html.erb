@@ -11,9 +11,9 @@
 
 <section id="statistics" >
   <h3>Shelter Statistics</h3>
-  <h4>Count of Pets at Shelter: <%=  %>
-  <h4>Average Review Rating: <%=  %>
-  <h4>Number of applications on file: <%=  %>
+  <h4>Count of Pets at Shelter: <%= @shelter.number_of_pets %>
+  <h4>Average Review Rating: <%= @shelter.average_review_rating.to_f.round(1) %>
+  <h4>Number of applications on file: <%= @shelter.number_of_applications %>
 </section>
 
 <%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new", method: "get" %>

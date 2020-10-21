@@ -214,11 +214,21 @@ describe "as a visitor" do
                           sex: "Male",
                           shelter_id: shelter_1.id)
 
+      pet_4 = Pet.create!(image: "https://upload.wikimedia.org/wikipedi8/87.jpg",
+                          name: "BlueBird",
+                          approximate_age: "6",
+                          sex: "Female",
+                          shelter_id: shelter_1.id)
+
       application_1 = Application.create!(description: "I love that journey for me.",
                                           status: "Pending",
                                           user_id: user_1.id)
 
       application_2 = Application.create!(description: "I'm worried Blue has already been adopted",
+                                          status: "Pending",
+                                          user_id: user_2.id)
+
+      application_3 = Application.create!(description: "I'm worried Blue has already been adopted",
                                           status: "Pending",
                                           user_id: user_2.id)
 
@@ -228,12 +238,15 @@ describe "as a visitor" do
       pet_application_2 = PetApplication.create!(pet_id: pet_2.id,
                                                  application_id: application_2.id)
 
+      pet_application_3 = PetApplication.create!(pet_id: pet_4.id,
+                                                 application_id: application_2.id)
+
       visit("/shelters/#{shelter_1.id}")
 
       within("#statistics") do
-        expect(page).to have_content(3)
         expect(page).to have_content(4)
-        expect(page).to have_content(2)
+        expect(page).to have_content(4.0)
+        expect(page).to have_content(3)
       end
     end
   end
