@@ -8,5 +8,7 @@
 <p><%= @pet.sex %></p>
 <p><%= @pet.adoption_status %></p>
 <a href="/pets/<%= @pet.id %>/edit">Update Pet</a>
-<%= link_to "Delete Pet", "/pets/#{@pet.id}", method: "delete" %></br></br>
+<% if !@pet.on_approved_application? %>
+  <%= link_to "Delete Pet", "/pets/#{@pet.id}", method: "delete" %></br></br>
+<% end %>
 <%= link_to "View All Applications", "/pets/#{@pet.id}/applications", method: "get" %>
