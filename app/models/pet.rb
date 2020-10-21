@@ -13,4 +13,7 @@ class Pet < ApplicationRecord
     applications.any? {|app| app.status == "Approved"}
   end
 
+  def self.pets_on_approved_applications
+    Pet.joins(:pet_applications, :applications).where("applications.status = ?", "Approved")
+  end
 end

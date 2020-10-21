@@ -63,8 +63,10 @@ describe "as a visitor" do
         end
 
         within("#pet-#{pet_3.id}") do
-          expect(page).to have_link(pet_3.name)
+          click_link(pet_3.name)
         end
+
+        expect(current_path).to eq("/pets/#{pet_3.id}")
       end
     end
   end
