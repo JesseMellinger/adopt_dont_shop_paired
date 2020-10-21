@@ -1,23 +1,5 @@
 require 'rails_helper'
 
-# As a visitor
-# When I visit the pet index page
-# Then I see a link to "Start an Application"
-# When I click this link
-# Then I am taken to the new application page where I see a form
-# When I fill in this form with my user name (assuming I have already created a user in the system)
-# And I click submit
-# Then I am taken to the new application's show page
-# And I see my user listed along with all of my address information
-# And I see an indicator that this application is "In Progress"
-
-# As a visitor
-# When I visit the new application page
-# And I fill in the form with the name of a User that doesn't exist in the database
-# And I click submit
-# Then I am taken back to the new applications page
-# And I see a message that the user could not be found.
-
 describe "as a visitor" do
   describe "when I'm on a new application page, I can complete a form" do
     describe "when I fill in this form with my user name and I click submit" do
@@ -38,7 +20,7 @@ describe "as a visitor" do
         application_1 = Application.find_by(user_id: user_1.id)
 
         expect(current_path).to eq("/applications/#{application_1.id}")
-        
+
         expect(page).to have_content("User Name: #{user_1.name}")
         expect(page).to have_content("Street Address: #{user_1.street_address}")
         expect(page).to have_content("City: #{user_1.city}")
