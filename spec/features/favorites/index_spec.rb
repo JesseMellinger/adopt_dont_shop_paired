@@ -57,7 +57,7 @@ describe "as a visitor" do
                                                    application_id: application_3.id)
 
         visit("/favorites")
-        
+
         within("#pet-#{pet_1.id}") do
           expect(page).to have_link(pet_1.name)
         end

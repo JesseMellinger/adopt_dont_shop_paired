@@ -52,17 +52,21 @@ describe "as a visitor" do
 
       visit("/shelters/#{shelter_1.id}")
 
-      expect(page).to have_content(review_1.title)
-      expect(page).to have_content(review_1.rating)
-      expect(page).to have_content(review_1.content)
-      expect(page).to have_content(review_1.picture)
-      expect(page).to have_content(user_1.name)
+      within("#review-#{review_1.id}") do
+        expect(page).to have_content(review_1.title)
+        expect(page).to have_content(review_1.rating)
+        expect(page).to have_content(review_1.content)
+        expect(page.find("#image")['src']).to have_content("https://upload.wikimedia.org/wikipedia/commons/0/00/Epicteti_Enchiridion_Latinis_versibus_adumbratum_%28Oxford_1715%29_frontispiece.jpg")
+        expect(page).to have_content(user_1.name)
+      end
 
-      expect(page).to have_content(review_2.title)
-      expect(page).to have_content(review_2.rating)
-      expect(page).to have_content(review_2.content)
-      expect(page).to have_content(review_2.picture)
-      expect(page).to have_content(user_2.name)
+      within("#review-#{review_2.id}") do
+        expect(page).to have_content(review_2.title)
+        expect(page).to have_content(review_2.rating)
+        expect(page).to have_content(review_2.content)
+        expect(page.find("#image")['src']).to have_content("https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
+        expect(page).to have_content(user_2.name)
+      end
     end
     it "then I see a link to add a new review for this shelter" do
       shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
