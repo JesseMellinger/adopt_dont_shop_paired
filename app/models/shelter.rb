@@ -32,4 +32,8 @@ class Shelter < ApplicationRecord
     Pet.where("shelter_id = ?", self.id)
   end
 
+  def delete_associated_reviews
+    Review.where("shelter_id = ?", self.id).destroy_all
+  end
+
 end
