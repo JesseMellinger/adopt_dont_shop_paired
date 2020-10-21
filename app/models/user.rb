@@ -17,4 +17,12 @@ class User < ApplicationRecord
   def reviews?
     reviews.count > 0
   end
+
+  def self.find_by_name(name)
+    User.find_by(name: name)
+  end
+
+  def self.find_by_id(id)
+    User.find(id)
+  end
 end

@@ -1,13 +1,8 @@
 class ApplicationsController < ApplicationController
 
   def show
-    @application = Application.find(params[:id])
-
-    if !params[:search].nil?
-      @search_results = Pet.where('lower(name) like ?', "%#{params[:search].downcase}%")
-    else
-      @search_results = Pet.where(name: params[:search])
-    end
+    @application = Application.find_application(params[:id])
+    @search_results = Pet.find_all_pets_by_name(params[:search])
   end
 
   def new
@@ -15,7 +10,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:user_name])
+    user = User.find_by_name(params[:user_name])
     application = Application.new(status: "In Progress")
 
     if user
@@ -30,7 +25,7 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    application = Application.find(params[:id])
+    application = Application.find_application(params[:id])
 
     if !params[:body].empty?
       application.update(description: params[:body],

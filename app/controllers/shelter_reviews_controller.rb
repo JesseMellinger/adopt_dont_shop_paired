@@ -5,7 +5,7 @@ class ShelterReviewsController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:name])
+    user = User.find_by_name(params[:name])
     review = Review.new(shelter_review_params)
 
     if user
@@ -24,16 +24,15 @@ class ShelterReviewsController < ApplicationController
     end
   end
 
-  #MVC
   def edit
-    @shelter = Shelter.find(params[:shelter_id])
-    @review = Review.find(params[:review_id])
-    @user = User.find(@review.user_id)
+    @shelter = Shelter.find_by_id(params[:shelter_id])
+    @review = Review.find_by_id(params[:review_id])
+    @user = User.find_by_id(@review.user_id)
   end
 
   def update
-    user = User.find_by(name: params[:name])
-    review = Review.find(params[:review_id])
+    user = User.find_by_name(params[:name])
+    review = Review.find_by_id(params[:review_id])
 
     if user
       user.update(name: params[:name])

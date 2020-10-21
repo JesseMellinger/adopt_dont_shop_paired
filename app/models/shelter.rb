@@ -36,4 +36,12 @@ class Shelter < ApplicationRecord
     Review.where("shelter_id = ?", self.id).destroy_all
   end
 
+  def self.find_by_id(id)
+    Shelter.find(id)
+  end
+
+  def self.get_all_shelters
+    Shelter.all
+  end
+
 end

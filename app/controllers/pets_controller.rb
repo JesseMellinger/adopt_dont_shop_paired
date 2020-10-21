@@ -1,19 +1,19 @@
 class PetsController < ApplicationController
 
   def index
-    @pets = Pet.all
+    @pets = Pet.get_all_pets
   end
 
   def show
-    @pet = Pet.find(params[:id])
+    @pet = Pet.find_by_id(params[:id])
   end
 
   def edit
-    @pet = Pet.find(params[:id])
+    @pet = Pet.find_by_id(params[:id])
   end
 
   def update
-    pet = Pet.find(params[:id])
+    pet = Pet.find_by_id(params[:id])
     pet.update({
       image: params[:pet][:image],
       name: params[:pet][:name],

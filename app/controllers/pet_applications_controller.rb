@@ -1,7 +1,7 @@
 class PetApplicationsController < ApplicationController
 
   def index
-    @pet_applications = PetApplication.where(pet_id: params[:pet_id])
+    @pet_applications = PetApplication.find_all_by_pet_id(params[:pet_id])
   end
 
   def create

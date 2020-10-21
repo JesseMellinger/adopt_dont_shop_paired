@@ -5,20 +5,20 @@
 <p><%= @user.zip %></p>
 
 <% if @user.reviews? %>
-  <h2>Average Rating of Reviews: <%= @average_review_rating %></h2>
+  <h2>Average Rating of Reviews: <%= @user.average_review_rating.to_f.round(1) %></h2>
 
   <section id="best-review">
     <h2>Best Review:</h2>
-    <h3><%= @best_review.title %></h3>
-    <p><%= @best_review.rating %></p>
-    <p><%= @best_review.content %></p>
+    <h3><%= @user.best_review.title %></h3>
+    <p><%= @user.best_review.rating %></p>
+    <p><%= @user.best_review.content %></p>
   </section>
 
   <section id="worst-review">
     <h2>Worst Review:</h2>
-    <h3><%= @worst_review.title %></h3>
-    <p><%= @worst_review.rating %></p>
-    <p><%= @worst_review.content %></p>
+    <h3><%= @user.worst_review.title %></h3>
+    <p><%= @user.worst_review.rating %></p>
+    <p><%= @user.worst_review.content %></p>
   </section>
 <% end %>
 
