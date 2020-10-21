@@ -1,31 +1,5 @@
 require 'rails_helper'
 
-# As a visitor,
-# When I visit a shelter's show page
-# I see a link to edit the shelter review next to each review.
-# When I click on this link, I am taken to an edit shelter review path
-# On this new page, I see a form that includes that review's pre populated data:
-# - title
-# - rating
-# - content
-# - image
-# - the name of the user that wrote the review
-# I can update any of these fields and submit the form.
-# When the form is submitted, I should return to that shelter's show page
-# And I can see my updated review
-
-# As a visitor,
-# When I visit the page to edit a review
-# And I fail to enter a title, a rating, and/or content in the edit shelter review form, but still try to submit the form
-# I see a flash message indicating that I need to fill in a title, rating, and content in order to edit a shelter review
-# And I'm returned to the edit form to edit that review
-
-# As a visitor,
-# When I visit the page to edit a review
-# And I enter the name of a User that doesn't exist in the database, but still try to submit the form
-# I see a flash message indicating that the User couldn't be found
-# And I'm returned to the edit form to edit the review
-
 describe "when I click on the Edit Review link" do
   before :each do
     @shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
@@ -84,7 +58,7 @@ describe "when I click on the Edit Review link" do
         expect(page).to have_content("Ohh yea, you gotta get schwifty.")
         expect(page).to have_content(4)
         expect(page).to have_content("Hello, IT. Have you tried turning it off and on again?")
-        expect(page).to have_content("https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
+        expect(page.find("#image")['src']).to have_content("https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png")
         expect(page).to have_content("Testy")
       end
     end

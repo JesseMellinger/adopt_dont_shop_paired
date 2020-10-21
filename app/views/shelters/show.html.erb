@@ -24,7 +24,11 @@
     <h3><%= review.title %></h3>
     <p><%= review.rating %></p>
     <p><%= review.content %></p>
-    <p><%= review.picture %></p>
+    <% if review.picture == "" %>
+      <img id="image" src="https://i.kym-cdn.com/entries/icons/original/000/018/012/this_is_fine.jpeg"/>
+    <% else %>
+      <img id="image" src="<%= review.picture %>"/>
+    <% end %>
     <p><%= review.user.name %></p>
     <%= link_to "Edit Review", "/shelters/#{@shelter.id}/#{review.id}/edit", method: "get" %>
     <%= link_to "Delete Review", "/shelters/#{@shelter.id}/#{review.id}", method: "delete" %>
