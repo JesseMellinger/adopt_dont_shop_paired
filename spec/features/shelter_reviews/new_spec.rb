@@ -1,21 +1,23 @@
 require 'rails_helper'
 
 describe "as a visitor" do
-  describe "when I'm on a new review page, I can complete a form" do
-    it "then I submit a form and return to that shelters show page where I see my review" do
-      shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+  before :each do
+    @shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
                                  address: "1400 Fairgrounds Road",
                                  city: "Eagle",
                                  state: "CO",
                                  zip: "81631")
 
-      user_1 = User.create!(name: "Testy",
+    @user_1 = User.create!(name: "Testy",
                            street_address: "221B Baker St.",
                            city: "London",
                            state: "CO",
                            zip: "81650")
+  end
+  describe "when I'm on a new review page, I can complete a form" do
+    it "then I submit a form and return to that shelters show page where I see my review" do
 
-      visit("/shelters/#{shelter_1.id}/reviews/new")
+      visit("/shelters/#{@shelter_1.id}/reviews/new")
 
       fill_in("title", with: "Friends don\'t lie")
       fill_in("rating", with: "5")
@@ -25,7 +27,7 @@ describe "as a visitor" do
 
       click_on("Create Review")
 
-      expect(current_path).to eq("/shelters/#{shelter_1.id}")
+      expect(current_path).to eq("/shelters/#{@shelter_1.id}")
 
       expect(page).to have_content("Friends don\'t lie")
       expect(page).to have_content("5")
@@ -36,20 +38,8 @@ describe "as a visitor" do
     end
     describe "when I fail to enter a title, a rating, and/or content in the new shelter review form, but still try to submit the form" do
       it "I see a flash message indicating that I need to fill in a title, rating, and content in order to submit a shelter review" do
-        shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
-                                   address: "1400 Fairgrounds Road",
-                                   city: "Eagle",
-                                   state: "CO",
-                                   zip: "81631")
 
-        user_1 = User.create!(name: "Testy",
-                             street_address: "221B Baker St.",
-                             city: "London",
-                             state: "CO",
-                             zip: "81650")
-
-
-        visit("/shelters/#{shelter_1.id}/reviews/new")
+        visit("/shelters/#{@shelter_1.id}/reviews/new")
 
         fill_in("title", with: "Friends don\'t lie")
         fill_in("rating", with: 5)
@@ -61,7 +51,7 @@ describe "as a visitor" do
 
         expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
 
-        expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
 
         fill_in("title", with: "")
         fill_in("rating", with: "")
@@ -73,25 +63,13 @@ describe "as a visitor" do
 
         expect(page).to have_content("Please fill in the 'Title', 'Rating', and 'Content' fields")
 
-        expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
 
       end
       describe "when I enter the name of a user that doesn't exist in the database, but still try to submit the form" do
         it "then I see a flash message indicating that the User couldn't be found" do
-          shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
-                                     address: "1400 Fairgrounds Road",
-                                     city: "Eagle",
-                                     state: "CO",
-                                     zip: "81631")
 
-          user_1 = User.create!(name: "Testy",
-                               street_address: "221B Baker St.",
-                               city: "London",
-                               state: "CO",
-                               zip: "81650")
-
-
-          visit("/shelters/#{shelter_1.id}/reviews/new")
+          visit("/shelters/#{@shelter_1.id}/reviews/new")
 
           fill_in("title", with: "Friends don\'t lie")
           fill_in("rating", with: 5)
@@ -103,7 +81,7 @@ describe "as a visitor" do
 
           expect(page).to have_content("User could not be found")
 
-          expect(current_path).to eq("/shelters/#{shelter_1.id}/reviews/new")
+          expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
 
         end
       end
@@ -112,19 +90,8 @@ describe "as a visitor" do
   describe "when I create a review for a shelter" do
     describe "and do not fill in the field for an image" do
       it "a default image is used and displayed for that review upon submission" do
-        shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
-                                   address: "1400 Fairgrounds Road",
-                                   city: "Eagle",
-                                   state: "CO",
-                                   zip: "81631")
 
-        user_1 = User.create!(name: "Testy",
-                             street_address: "221B Baker St.",
-                             city: "London",
-                             state: "CO",
-                             zip: "81650")
-
-        visit("/shelters/#{shelter_1.id}/reviews/new")
+        visit("/shelters/#{@shelter_1.id}/reviews/new")
 
         fill_in("title", with: "Friends don\'t lie")
         fill_in("rating", with: "5")
