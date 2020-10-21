@@ -45,8 +45,4 @@ class ApplicationsController < ApplicationController
 
   end
 
-  private
-  def application_params
-    params.permit(:status, :description)
-  end
 end

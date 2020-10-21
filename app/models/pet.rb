@@ -9,4 +9,8 @@ class Pet < ApplicationRecord
     Pet.where("shelter_id = ?", id)
   end
 
+  def on_approved_application?
+    applications.any? {|app| app.status == "Approved"}
+  end
+
 end
