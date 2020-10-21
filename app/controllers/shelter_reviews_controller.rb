@@ -27,7 +27,6 @@ class ShelterReviewsController < ApplicationController
   def edit
     @shelter = Shelter.find_by_id(params[:shelter_id])
     @review = Review.find_by_id(params[:review_id])
-    @user = User.find_by_id(@review.user_id)
   end
 
   def update

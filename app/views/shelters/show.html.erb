@@ -19,7 +19,7 @@
 </section>
 
 <%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new", method: "get" %>
-<% @reviews.each do |review| %>
+<% @shelter.reviews.each do |review| %>
   <section id="review-<%= review.id %>">
     <h3><%= review.title %></h3>
     <p><%= review.rating %></p>
