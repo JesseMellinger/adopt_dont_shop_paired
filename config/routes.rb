@@ -40,4 +40,6 @@ Rails.application.routes.draw do
 
   get '/admin/applications/:id', to: 'admin_applications#show'
   patch '/admin/applications/:application_id/:pet_id', to: 'admin_applications#update'
+
+  get '/favorites', to: 'favorites#index'
 end

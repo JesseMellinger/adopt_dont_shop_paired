@@ -1,0 +1,7 @@
+<h2>Favorites</h2>
+
+<% @approved_pets.each do |pet| %>
+    <section id="pet-<%= pet.id %>">
+      <h2><%= link_to "#{pet.name}", "/pets/#{pet.id}", method: "get" %></h2></br>
+    </section>
+<% end %>

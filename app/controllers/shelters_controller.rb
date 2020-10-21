@@ -1,12 +1,11 @@
 class SheltersController < ApplicationController
 
   def index
-    @shelters = Shelter.all
+    @shelters = Shelter.get_all_shelters
   end
 
   def show
-    @shelter = Shelter.find(params[:id])
-    @reviews = @shelter.reviews
+    @shelter = Shelter.find_by_id(params[:id])
   end
 
   def new
@@ -29,11 +28,11 @@ class SheltersController < ApplicationController
   end
 
   def edit
-    @shelter = Shelter.find(params[:id])
+    @shelter = Shelter.find_by_id(params[:id])
   end
 
   def update
-    shelter = Shelter.find(params[:id])
+    shelter = Shelter.find_by_id(params[:id])
     shelter.update({
       name: params[:shelter][:name],
       address: params[:shelter][:address],
@@ -46,7 +45,7 @@ class SheltersController < ApplicationController
     end
 
     def destroy
-      @shelter = Shelter.find(params[:id])
+      @shelter = Shelter.find_by_id(params[:id])
       @shelter.delete_associated_pets
       @shelter.delete_associated_reviews
       Shelter.destroy(@shelter.id)
