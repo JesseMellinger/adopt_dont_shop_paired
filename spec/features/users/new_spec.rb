@@ -1,17 +1,5 @@
 require 'rails_helper'
 
-# As a visitor
-# When I visit '/users/new'
-# I see a form to create a new user
-# When I fill in the form with my
-#   - Name
-#   - Street Address
-#   - City
-#   - State
-#   - Zip
-# Then I am taken to my new user's show page
-# And I see all of the information I entered in the form
-
 describe "as a visitor" do
   describe "when I visit /users/new" do
     it "I see a form to create a new user" do
