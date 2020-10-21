@@ -3,7 +3,7 @@ class Shelter < ApplicationRecord
   has_many :reviews
 
   def number_of_pets
-    Pet.where("shelter_id = ?", self.id).count
+    find_pets_of_shelter().count
   end
 
   def average_review_rating
@@ -21,6 +21,15 @@ class Shelter < ApplicationRecord
     pets.any? do |pet|
       pet.on_approved_application?
     end
+  end
+
+  def delete_associated_pets
+    PetApplication.where(pet_id: find_pets_of_shelter.pluck(:id)).destroy_all
+    Pet.destroy(find_pets_of_shelter.pluck(:id))
+  end
+
+  def find_pets_of_shelter
+    Pet.where("shelter_id = ?", self.id)
   end
 
 end
