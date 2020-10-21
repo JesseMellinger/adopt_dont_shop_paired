@@ -102,7 +102,7 @@ pet_2 = Pet.create!(image: "https://upload.wikimedia.org/wikipedia/commons/8/87/
                     sex: "Male",
                     shelter_id: shelter_1.id)
 
-pet_3 = Pet.create!(image: "https://upload.wikimedia.org/wikipedi8/87/GCH_Int_Ch_UCH_Zerubbabel_von_Herrenhausen_CGC_MHA.jpg",
+pet_3 = Pet.create!(image: "http://cdn.akc.org/content/article-body-image/golden_puppy_dog_pictures.jpg",
                     name: "Blue",
                     approximate_age: "5",
                     sex: "Male",
