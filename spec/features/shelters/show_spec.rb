@@ -388,6 +388,56 @@ describe "as a visitor" do
           expect(shelter_1.pets.count).to eq(0)
         end
       end
+      describe "when I delete a shelter" do
+        it "all reviews associated with that shelter are also deleted" do
+          shelter_1 = Shelter.create!(name: "Eagle County Animal Services",
+                                     address: "1400 Fairgrounds Road",
+                                     city: "Eagle",
+                                     state: "CO",
+                                     zip: "81631")
+
+          user_1 = User.create!(name: "Testy",
+                                street_address: "221B Baker St.",
+                                city: "London",
+                                state: "CO",
+                                zip: "81650")
+
+          user_2 = User.create!(name: "Tyrion Lannister",
+                                street_address: "282 Kevin Brook",
+                                city: "Lannisport",
+                                state: "CA",
+                                zip: "58517")
+
+          review_1 = Review.create!(title: "Friends don\'t lie",
+                                    rating: 5,
+                                    content: "Only the educated are free.",
+                                    picture: "https://upload.wikimedia.org/wikipedia/commons/0/00/Epicteti_Enchiridion_Latinis_versibus_adumbratum_%28Oxford_1715%29_frontispiece.jpg",
+                                    shelter_id: shelter_1.id,
+                                    user_id: user_1.id)
+
+          review_2 = Review.create!(title: "Ohh yea, you gotta get schwifty.",
+                                    rating: 4,
+                                    content: "Hello, IT. Have you tried turning it off and on again?",
+                                    picture: "https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png",
+                                    shelter_id: shelter_1.id,
+                                    user_id: user_1.id)
+
+          review_3 = Review.create!(title: "Great food",
+                                    rating: 3,
+                                    content: "I thought this was a restaurant but I was wrong. The bone-shaped cookies were good though.",
+                                    picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg/594px-Ensaladang_Lato_%28Seaweed_Salad%29_-_Philippines_1.jpg",
+                                    shelter_id: shelter_1.id,
+                                    user_id: user_2.id)
+
+          visit("/shelters/#{shelter_1.id}")
+
+          expect(shelter_1.reviews.count).to eq(3)
+
+          click_link("Delete Shelter")
+
+          expect(shelter_1.reviews.count).to eq(0)
+        end
+      end
     end
   end
 end
